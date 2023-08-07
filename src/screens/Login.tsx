@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  HStack,
   Image,
   Input,
   ScrollView,
@@ -13,8 +14,36 @@ import LottieView from "lottie-react-native";
 import GoogleIcon from "../assets/googlcon.svg";
 import { useEffect, useRef } from "react";
 import { TouchableOpacity } from "react-native";
+import { Controller, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+interface FormData {
+  email: string;
+  password: string;
+}
+
+const loginSchema = yup.object({
+  email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
+  password: yup
+    .string()
+    .required("Informe a senha.")
+    .min(6, "A senha deve ter no mínimo 6 caracteres."),
+});
+
+function handleSignIn({ email, password }: FormData) {
+  console.log(email, password);
+}
 
 export function Login() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: yupResolver(loginSchema),
+  });
+
   const animation = useRef<any>(null);
   useEffect(() => {
     animation.current?.play();
@@ -40,20 +69,46 @@ export function Login() {
           ref={animation}
         />
 
-        <Input
-          bgColor="white"
-          placeholder="Digite seu nome"
-          type="text"
-          mb={4}
-          fontSize="sm"
+        <Controller
+          control={control}
+          name="email"
+          rules={{ required: "Informe o e-mail" }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              bgColor="white"
+              placeholder="Email"
+              value={value}
+              type="text"
+              mb={errors.email?.message ? 2 : 4}
+              fontSize="sm"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={onChange}
+            />
+          )}
         />
-        <Input
-          bgColor="white"
-          placeholder="Digite seu email"
-          type="text"
-          mb={4}
-          fontSize="sm"
+          <Text color="red.500" mb={2} >{errors.email?.message}</Text>
+
+        <Controller
+          control={control}
+          name="password"
+          rules={{ required: "Informe a senha" }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              bgColor="white"
+              placeholder="Senha"
+              secureTextEntry
+              onChangeText={onChange}
+              value={value}
+              type="password"
+              mb={errors.password?.message ? 2 : 4}
+              fontSize="sm"
+            />
+          )}
         />
+
+          <Text mb={2}>{errors.password?.message}</Text>
+
         <TouchableOpacity
           style={{
             marginBottom: 16,
@@ -63,7 +118,11 @@ export function Login() {
             justifyContent: "center",
             alignItems: "center",
             height: 48,
-            width: "100%"
+            width: "100%",
+          }}
+          onPress={() => {
+            console.log("Botão de login pressionado!");
+            handleSubmit(handleSignIn)();
           }}
         >
           <Text
@@ -102,7 +161,7 @@ export function Login() {
             justifyContent: "center",
             alignItems: "center",
             height: 48,
-            width: "100%"
+            width: "100%",
           }}
         >
           <Text
