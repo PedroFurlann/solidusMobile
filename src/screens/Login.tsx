@@ -87,7 +87,7 @@ export function Login() {
             />
           )}
         />
-          <Text color="red.500" mb={2} >{errors.email?.message}</Text>
+          <Text color="red.500" mb={2} fontWeight="bold">{errors.email?.message}</Text>
 
         <Controller
           control={control}
@@ -107,7 +107,7 @@ export function Login() {
           )}
         />
 
-          <Text mb={2}>{errors.password?.message}</Text>
+          <Text mb={2} color="red.500" fontWeight="bold">{errors.password?.message}</Text>
 
         <TouchableOpacity
           style={{
