@@ -1,13 +1,8 @@
 import {
-  Box,
-  Button,
-  HStack,
-  Image,
   Input,
   ScrollView,
   Text,
   VStack,
-  View,
 } from "native-base";
 import { AuthHeader } from "../components/AuthHeader";
 import LottieView from "lottie-react-native";
@@ -17,6 +12,7 @@ import { TouchableOpacity } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button } from "../components/Button";
 
 interface FormData {
   email: string;
@@ -109,70 +105,13 @@ export function Login() {
 
           <Text mb={2} color="red.500" fontWeight="bold">{errors.password?.message}</Text>
 
-        <TouchableOpacity
-          style={{
-            marginBottom: 16,
-            backgroundColor: "#fbbf24",
-            borderRadius: 8,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: 48,
-            width: "100%",
-          }}
-          onPress={() => {
-            console.log("Botão de login pressionado!");
-            handleSubmit(handleSignIn)();
-          }}
-        >
-          <Text
-            color="gray.200"
-            fontWeight="bold"
-            fontSize="md"
-            fontFamily="heading"
-          >
-            Entrar
-          </Text>
-        </TouchableOpacity>
+        <Button onSubmit={handleSubmit(handleSignIn)} title="Entrar" backgroundColor="#fbbf24" textColor="gray.200" />
 
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            gap: 16,
-            alignItems: "center",
-            justifyContent: "center",
-            height: 48,
-            width: "100%",
-            backgroundColor: "white",
-            borderRadius: 8,
-            marginBottom: 16,
-          }}
-        >
+        <Button title="Entrar com a conta Google" backgroundColor="white" fontWeight="normal" >
           <GoogleIcon style={{ width: 20, height: 20, marginRight: 16 }} />
-          <Text>Entrar com a conta Google</Text>
-        </TouchableOpacity>
+        </Button>
 
-        <TouchableOpacity
-          style={{
-            marginBottom: 16,
-            backgroundColor: "#fbbf24",
-            borderRadius: 8,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            height: 48,
-            width: "100%",
-          }}
-        >
-          <Text
-            color="gray.200"
-            fontWeight="bold"
-            fontSize="md"
-            fontFamily="heading"
-          >
-            Cadastre-se aqui
-          </Text>
-        </TouchableOpacity>
+        <Button backgroundColor="#fbbf24" title="Cadastre-se aqui" textColor="gray.200" />
       </VStack>
     </ScrollView>
   );
