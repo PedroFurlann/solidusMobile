@@ -1,37 +1,35 @@
-import {
-  Input,
-  ScrollView,
-  Text,
-  VStack,
-} from "native-base";
+import { IconButton, Input, ScrollView, Text, VStack } from "native-base";
 import { AuthHeader } from "../components/AuthHeader";
 import LottieView from "lottie-react-native";
 import GoogleIcon from "../assets/googlcon.svg";
-import { useEffect, useRef } from "react";
-import { TouchableOpacity } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Touchable, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedbackBase } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../components/Button";
+import { MaterialIcons } from '@expo/vector-icons'
 
 interface FormData {
   email: string;
   password: string;
 }
 
-const loginSchema = yup.object({
-  email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
-  password: yup
-    .string()
-    .required("Informe a senha.")
-    .min(6, "A senha deve ter no mínimo 6 caracteres."),
-});
-
-function handleSignIn({ email, password }: FormData) {
-  console.log(email, password);
-}
-
 export function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const loginSchema = yup.object({
+    email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
+    password: yup
+      .string()
+      .required("Informe a senha.")
+      .min(6, "A senha deve ter no mínimo 6 caracteres."),
+  });
+
+  function handleSignIn({ email, password }: FormData) {
+    console.log(email, password);
+  }
+
   const {
     control,
     handleSubmit,
@@ -75,7 +73,6 @@ export function Login() {
               placeholder="Email"
               value={value}
               type="text"
-              mb={errors.email?.message ? 2 : 4}
               fontSize="sm"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -83,7 +80,9 @@ export function Login() {
             />
           )}
         />
-          <Text color="red.500" mb={2} fontWeight="bold">{errors.email?.message}</Text>
+        <Text color="red.500" mb={2} fontWeight="bold">
+          {errors.email?.message}
+        </Text>
 
         <Controller
           control={control}
@@ -93,25 +92,44 @@ export function Login() {
             <Input
               bgColor="white"
               placeholder="Senha"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               onChangeText={onChange}
               value={value}
               type="password"
-              mb={errors.password?.message ? 2 : 4}
               fontSize="sm"
+              InputRightElement={
+                <TouchableNativeFeedback onPress={() => setShowPassword(!showPassword)} >
+                  <MaterialIcons style={{ marginRight: 12 }} name={showPassword ? "visibility" : "visibility-off"} size={21} color="gray" />
+                </TouchableNativeFeedback>
+              }
             />
           )}
         />
 
-          <Text mb={2} color="red.500" fontWeight="bold">{errors.password?.message}</Text>
+        <Text mb={2} color="red.500" fontWeight="bold">
+          {errors.password?.message}
+        </Text>
 
-        <Button onSubmit={handleSubmit(handleSignIn)} title="Entrar" backgroundColor="#fbbf24" textColor="gray.200" />
+        <Button
+          onSubmit={handleSubmit(handleSignIn)}
+          title="Entrar"
+          backgroundColor="#fbbf24"
+          textColor="gray.200"
+        />
 
-        <Button title="Entrar com a conta Google" backgroundColor="white" fontWeight="normal" >
+        <Button
+          title="Entrar com a conta Google"
+          backgroundColor="white"
+          fontWeight="normal"
+        >
           <GoogleIcon style={{ width: 20, height: 20, marginRight: 16 }} />
         </Button>
 
-        <Button backgroundColor="#fbbf24" title="Cadastre-se aqui" textColor="gray.200" />
+        <Button
+          backgroundColor="#fbbf24"
+          title="Cadastre-se aqui"
+          textColor="gray.200"
+        />
       </VStack>
     </ScrollView>
   );
