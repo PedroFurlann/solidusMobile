@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button } from "../components/Button";
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { TouchableNativeFeedback } from "react-native";
 
 interface FormData {
@@ -17,7 +17,7 @@ interface FormData {
 }
 
 export function Register() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
   const animation = useRef<any>(null);
   useEffect(() => {
@@ -78,6 +78,15 @@ export function Register() {
           style={{ width: 200, height: 200, marginBottom: 16 }}
           ref={animation}
         />
+        <Text
+          color="white"
+          fontWeight="bold"
+          mb={4}
+          fontFamily="heading"
+          fontSize="2xl"
+        >
+          Cadastre sua conta
+        </Text>
 
         <Controller
           control={control}
@@ -87,8 +96,10 @@ export function Register() {
             <Input
               bgColor="white"
               placeholder="Nome"
+              fontWeight="medium"
               value={value}
               type="text"
+              mb={errors.name?.message ? 2 : 0}
               fontSize="sm"
               keyboardType="email-address"
               autoCapitalize="none"
@@ -96,7 +107,7 @@ export function Register() {
             />
           )}
         />
-        <Text color="red.500" mb={2} fontWeight="bold">
+        <Text color="red.500" mb={2} fontWeight="bold" display="flex">
           {errors.name?.message}
         </Text>
 
@@ -109,6 +120,8 @@ export function Register() {
               bgColor="white"
               placeholder="Email"
               onChangeText={onChange}
+              mb={errors.email?.message ? 2 : 0}
+              fontWeight="medium"
               value={value}
               type="text"
               fontSize="sm"
@@ -131,12 +144,21 @@ export function Register() {
               secureTextEntry
               value={value}
               type="password"
+              mb={errors.password?.message ? 2 : 0}
+              fontWeight="medium"
               fontSize="sm"
               autoCapitalize="none"
               onChangeText={onChange}
               InputRightElement={
-                <TouchableNativeFeedback onPress={() => setShowPassword(!showPassword)} >
-                  <MaterialIcons style={{ marginRight: 12 }} name={showPassword ? "visibility" : "visibility-off"} size={21} color="gray" />
+                <TouchableNativeFeedback
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <MaterialIcons
+                    style={{ marginRight: 12 }}
+                    name={showPassword ? "visibility" : "visibility-off"}
+                    size={21}
+                    color="#71717a"
+                  />
                 </TouchableNativeFeedback>
               }
             />
@@ -155,6 +177,8 @@ export function Register() {
               bgColor="white"
               placeholder="Confirme sua senha"
               secureTextEntry
+              mb={errors.confirm_password?.message ? 2 : 0}
+              fontWeight="medium"
               onChangeText={onChange}
               value={value}
               type="password"
@@ -171,15 +195,21 @@ export function Register() {
           backgroundColor="#fbbf24"
           title="Confirmar"
           onSubmit={handleSubmit(handleRegister)}
-          textColor="gray.200"
+          textColor="white"
         />
 
         <Button
           title="Voltar para o login"
           backgroundColor="#fbbf24"
-          textColor="gray.200"
-          
-        />
+          textColor="white"
+        >
+          <Feather
+            name="arrow-left-circle"
+            size={22}
+            color="#fff"
+            style={{ marginRight: 12, marginTop: 2 }}
+          />
+        </Button>
       </VStack>
     </ScrollView>
   );

@@ -3,12 +3,17 @@ import { AuthHeader } from "../components/AuthHeader";
 import LottieView from "lottie-react-native";
 import GoogleIcon from "../assets/googlcon.svg";
 import { useEffect, useRef, useState } from "react";
-import { Touchable, TouchableHighlight, TouchableNativeFeedback, TouchableWithoutFeedbackBase } from "react-native";
+import {
+  Touchable,
+  TouchableHighlight,
+  TouchableNativeFeedback,
+  TouchableWithoutFeedbackBase,
+} from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../components/Button";
-import { MaterialIcons } from '@expo/vector-icons'
+import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 interface FormData {
   email: string;
@@ -63,6 +68,16 @@ export function Login() {
           ref={animation}
         />
 
+        <Text
+          color="white"
+          fontWeight="bold"
+          mb={4}
+          fontFamily="heading"
+          fontSize="2xl"
+        >
+          Faça Login
+        </Text>
+
         <Controller
           control={control}
           name="email"
@@ -71,6 +86,9 @@ export function Login() {
             <Input
               bgColor="white"
               placeholder="Email"
+              mb={errors.email?.message ? 2 : 0}
+              fontWeight="medium"
+
               value={value}
               type="text"
               fontSize="sm"
@@ -92,14 +110,24 @@ export function Login() {
             <Input
               bgColor="white"
               placeholder="Senha"
+              fontWeight="medium"
               secureTextEntry={!showPassword}
               onChangeText={onChange}
               value={value}
+              mb={errors.password?.message ? 2 : 0}
+
               type="password"
               fontSize="sm"
               InputRightElement={
-                <TouchableNativeFeedback onPress={() => setShowPassword(!showPassword)} >
-                  <MaterialIcons style={{ marginRight: 12 }} name={showPassword ? "visibility" : "visibility-off"} size={21} color="gray" />
+                <TouchableNativeFeedback
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <MaterialIcons
+                    style={{ marginRight: 12 }}
+                    name={showPassword ? "visibility" : "visibility-off"}
+                    size={21}
+                    color="#71717a"
+                  />
                 </TouchableNativeFeedback>
               }
             />
@@ -114,7 +142,7 @@ export function Login() {
           onSubmit={handleSubmit(handleSignIn)}
           title="Entrar"
           backgroundColor="#fbbf24"
-          textColor="gray.200"
+          textColor="white"
         />
 
         <Button
@@ -128,8 +156,16 @@ export function Login() {
         <Button
           backgroundColor="#fbbf24"
           title="Cadastre-se aqui"
-          textColor="gray.200"
-        />
+          textColor="white"
+          iconLeft={false}
+        >
+          <Feather
+            name="arrow-right-circle"
+            size={22}
+            color="#fff"
+            style={{ marginLeft: 12, marginTop: 2 }}
+          />
+        </Button>
       </VStack>
     </ScrollView>
   );

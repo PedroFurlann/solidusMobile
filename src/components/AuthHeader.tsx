@@ -9,6 +9,7 @@ export function AuthHeader() {
       justifyContent="center"
       alignItems="center"
       bgColor="amber.400"
+      position="fixed"
     >
       <Image
         source={Logo}

@@ -10,6 +10,7 @@ interface Props extends TouchableOpacityProps {
   children?: ReactNode;
   textColor?: string | null;
   fontWeight?: string;
+  iconLeft?: boolean;
 }
 
 export function Button({
@@ -19,6 +20,7 @@ export function Button({
   children,
   textColor = null,
   fontWeight = "bold",
+  iconLeft = true,
   ...rest
 }: Props) {
   return (
@@ -36,15 +38,17 @@ export function Button({
       }}
       onPress={onSubmit}
     >
-      {children}
+      {iconLeft && children}
       <Text
         color={textColor}
         fontWeight={fontWeight}
         fontSize="md"
         fontFamily="heading"
       >
+      
         {title}
       </Text>
+      {!iconLeft && children}
     </TouchableOpacity>
   );
 }

@@ -20,7 +20,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Register />
+      {fontsLoaded && <Register />}
     </NativeBaseProvider>
   )
 };
