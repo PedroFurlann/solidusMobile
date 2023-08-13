@@ -7,6 +7,7 @@ import {
 } from "@expo-google-fonts/roboto";
 import { Register } from './src/screens/Register';
 import { Routes } from './src/routes';
+import { Transactions } from './src/screens/Transactions';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +22,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded && <Routes />}
+      {fontsLoaded && <Transactions />}
     </NativeBaseProvider>
   )
 };
