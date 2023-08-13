@@ -8,6 +8,8 @@ import * as yup from "yup";
 import { Button } from "../components/Button";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { TouchableNativeFeedback } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AuthNavigatorRoutesProps } from "../routes/auth.routes";
 
 interface FormData {
   name: string;
@@ -18,6 +20,8 @@ interface FormData {
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { navigate } = useNavigation<AuthNavigatorRoutesProps>()
 
   const animation = useRef<any>(null);
   useEffect(() => {
@@ -58,6 +62,11 @@ export function Register() {
   }: FormData) {
     console.log(name, email, password, confirm_password);
   }
+
+  function handleGoToLogin() {
+    navigate('login')
+  }
+
 
   return (
     <ScrollView
@@ -101,7 +110,6 @@ export function Register() {
               type="text"
               mb={errors.name?.message ? 2 : 0}
               fontSize="sm"
-              keyboardType="email-address"
               autoCapitalize="none"
               onChangeText={onChange}
             />
@@ -123,7 +131,8 @@ export function Register() {
               mb={errors.email?.message ? 2 : 0}
               fontWeight="medium"
               value={value}
-              type="text"
+              keyboardType="email-address"
+              type="text"     
               fontSize="sm"
             />
           )}
@@ -202,6 +211,7 @@ export function Register() {
           title="Voltar para o login"
           backgroundColor="#fbbf24"
           textColor="white"
+          onSubmit={handleGoToLogin}
         >
           <Feather
             name="arrow-left-circle"

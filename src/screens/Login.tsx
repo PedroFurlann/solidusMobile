@@ -14,6 +14,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "../components/Button";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { AuthNavigatorRoutesProps } from "../routes/auth.routes";
 
 interface FormData {
   email: string;
@@ -22,6 +24,9 @@ interface FormData {
 
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { navigate } = useNavigation<AuthNavigatorRoutesProps>()
+
 
   const loginSchema = yup.object({
     email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
@@ -33,6 +38,10 @@ export function Login() {
 
   function handleSignIn({ email, password }: FormData) {
     console.log(email, password);
+  }
+
+  function handleGoToRegister() {
+    navigate('register')
   }
 
   const {
@@ -88,7 +97,6 @@ export function Login() {
               placeholder="Email"
               mb={errors.email?.message ? 2 : 0}
               fontWeight="medium"
-
               value={value}
               type="text"
               fontSize="sm"
@@ -158,6 +166,7 @@ export function Login() {
           title="Cadastre-se aqui"
           textColor="white"
           iconLeft={false}
+          onSubmit={handleGoToRegister}
         >
           <Feather
             name="arrow-right-circle"
