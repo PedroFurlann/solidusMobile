@@ -1,14 +1,17 @@
 import { Box, HStack, Text } from "native-base";
 import { Feather } from "@expo/vector-icons";
+import { InterfaceBoxProps } from "native-base/lib/typescript/components/primitives/Box";
+import { priceFormatter } from "../utils/priceFormatter";
 
-interface Props {
+interface Props extends InterfaceBoxProps {
   amount: number;
   title: string;
 }
 
-export function TransactionCard({ title, amount }: Props) {
+export function TransactionCard({ title, amount, ...rest }: Props) {
   return (
     <Box
+      {...rest}
       p={4}
       bg="gray.700"
       borderRadius="md"
@@ -23,14 +26,14 @@ export function TransactionCard({ title, amount }: Props) {
       {amount < 0 || title.includes("gastos") ? (
         <HStack display="flex" alignItems="center">
           <Text color="red.500" bold marginRight={2} fontSize="md">
-            {amount}
+            - {priceFormatter.format(amount)}
           </Text>
           <Feather name="arrow-down-circle" color="#ef4444" size={18} />
         </HStack>
       ) : (
         <HStack display="flex" alignItems="center">
           <Text color="amber.400" bold marginRight={2} fontSize="md">
-            {amount}
+            {priceFormatter.format(amount)}
           </Text>
           <Feather name="arrow-up-circle" color="#fbbf24" size={18} />
         </HStack>
