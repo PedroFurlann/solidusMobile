@@ -1,10 +1,14 @@
 import { HStack, Image } from "native-base";
 import Logo from "../assets/logo.png";
 import { AvatarProfile } from "./AvatarProfile";
+import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
 
-export function MainHeader() {
+interface Props extends InterfaceHStackProps {}
+
+export function MainHeader({...rest}: Props) {
   return (
     <HStack
+      {...rest}
       w="full"
       h={20}
       justifyContent="center"

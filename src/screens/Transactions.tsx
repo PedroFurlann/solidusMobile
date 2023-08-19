@@ -1,5 +1,6 @@
-import { ScrollView, VStack } from "native-base";
+import { Box, ScrollView, Text, VStack } from "native-base";
 import { MainHeader } from "../components/MainHeader";
+import { TransactionCard } from "../components/TransactionCard";
 
 export function Transactions() {
   return (
@@ -8,16 +9,9 @@ export function Transactions() {
       showsVerticalScrollIndicator={false}
     >
       <MainHeader />
-      <VStack
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        pb={10}
-        bgColor="gray.900"
-        px={12}
-      >
-
+      <VStack flex={1} pb={10} bgColor="gray.900" px={12}>
+       <TransactionCard title="Total de gastos" amount={1200} />
       </VStack>
     </ScrollView>
-  )
+  );
 }
