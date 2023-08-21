@@ -1,7 +1,10 @@
-import { HStack, ScrollView, Text, VStack } from "native-base";
+import { Box, FlatList, HStack, ScrollView, Text, VStack } from "native-base";
 import { MainHeader } from "../components/MainHeader";
 import { TransactionCard } from "../components/TransactionCard";
 import { Button } from "../components/Button";
+import { TransactionDetails } from "../components/TransactionDetails";
+
+const fakeData = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
 
 export function Transactions() {
   return (
@@ -16,14 +19,37 @@ export function Transactions() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Text color="gray.200" bold fontSize="lg" textAlign="center" mt={4} mb={4}>
+          <Text
+            color="gray.200"
+            bold
+            fontSize="lg"
+            textAlign="center"
+            mt={4}
+            mb={4}
+          >
             Essas é o resumo de suas transações Pedro
           </Text>
-          <Button title="Nova transação" backgroundColor="#fbbf24" textColor="white" />
+          <Button
+            title="Nova transação"
+            backgroundColor="#fbbf24"
+            textColor="white"
+          />
         </VStack>
         <TransactionCard title="Total de gastos" amount={1200} mb={4} />
         <TransactionCard title="Balanço geral" amount={1400} mb={4} />
-        <TransactionCard title="Total de ganhos" amount={1300} />
+        <TransactionCard title="Total de ganhos" amount={1300} mb={12} />
+
+        <Box p={4} bg="gray.700" borderRadius="md" display="flex" mt={4}>
+          <FlatList 
+            data={fakeData}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
+              <TransactionDetails title={item} />
+            )}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ gap: 12 }}
+          />
+        </Box>
       </VStack>
     </ScrollView>
   );
