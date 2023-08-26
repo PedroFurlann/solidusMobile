@@ -8,6 +8,7 @@ import {
 import { Register } from './src/screens/Register';
 import { Routes } from './src/routes';
 import { Transactions } from './src/screens/Transactions';
+import { NewTransaction } from './src/screens/NewTransaction';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,7 +23,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded && <Transactions />}
+      {fontsLoaded && <NewTransaction />}
     </NativeBaseProvider>
   )
 };
