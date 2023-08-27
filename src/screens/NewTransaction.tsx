@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { Button } from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 interface FormData {
   title: string;
@@ -15,6 +16,8 @@ interface FormData {
 
 export function NewTransaction() {
   const [selectedType, setSelectedType] = useState("LOSS");
+
+  const { goBack } = useNavigation();
 
   const newTransactionSchema = yup.object({
     title: yup
@@ -33,6 +36,9 @@ export function NewTransaction() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(newTransactionSchema),
+    defaultValues: {
+      amount: 100
+    }
   });
 
   function handleNewTransaction({ title, amount }: FormData) {
@@ -61,7 +67,6 @@ export function NewTransaction() {
           <Controller
             control={control}
             name="title"
-            rules={{ required: "Digite o título da transação" }}
             render={({ field: { onChange, value } }) => (
               <Input
                 bgColor="white"
@@ -83,7 +88,6 @@ export function NewTransaction() {
           <Controller
             control={control}
             name="amount"
-            rules={{ required: "Escolha seu email" }}
             render={({ field: { onChange, value } }) => (
               <Input
                 bgColor="white"
@@ -172,6 +176,7 @@ export function NewTransaction() {
               title="Voltar"
               backgroundColor="#ef4444"
               textColor="#e4e4e7"
+              onSubmit={goBack}
             >
               <Feather
                 name="arrow-left-circle"
