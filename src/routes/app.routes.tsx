@@ -3,7 +3,7 @@ import {
   BottomTabNavigationProp,
 } from "@react-navigation/bottom-tabs";
 
-import { useTheme } from "native-base";
+import { Text, useTheme } from "native-base";
 
 import { Platform } from "react-native";
 import { Transactions } from "../screens/Transactions";
@@ -28,15 +28,14 @@ export function AppRoutes() {
     <Navigator
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
         tabBarActiveTintColor: colors.amber[400],
         tabBarInactiveTintColor: colors.gray[200],
         tabBarStyle: {
-          backgroundColor: colors.gray[600],
+          backgroundColor: colors.gray[900],
           borderTopWidth: 0,
-          height: Platform.OS === "android" ? "auto" : 96,
-          paddingBottom: sizes[10],
-          paddingTop: sizes[6],
+          height: Platform.OS === "android" ? 52 : 96,
+          paddingBottom: sizes[1],
+          paddingTop: sizes[4],
         },
       }}
     >
@@ -45,8 +44,11 @@ export function AppRoutes() {
         component={Transactions}
         options={{
           tabBarIcon: ({ color }) => (
-            <Feather name="dollar-sign" color={color} size={26} style={{ width: 24, height: 24 }}  />
+            <Feather name="dollar-sign" color={color} size={20} style={{ width: 28, height: 28 }}   />
           ),
+          tabBarLabel: ({ color }) => (
+            <Text color={color} bold style={{ fontSize: 13 }}>Transações</Text>
+          )
         }}
       />
 
