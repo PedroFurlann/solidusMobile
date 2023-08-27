@@ -150,7 +150,7 @@ export function Register() {
             <Input
               bgColor="white"
               placeholder="Senha"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               value={value}
               type="password"
               mb={errors.password?.message ? 2 : 0}
@@ -185,7 +185,7 @@ export function Register() {
             <Input
               bgColor="white"
               placeholder="Confirme sua senha"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               mb={errors.confirm_password?.message ? 2 : 0}
               fontWeight="medium"
               onChangeText={onChange}
