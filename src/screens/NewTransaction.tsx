@@ -35,6 +35,10 @@ export function NewTransaction() {
     resolver: yupResolver(newTransactionSchema),
   });
 
+  function handleNewTransaction({ title, amount }: FormData) {
+    console.log("Title => ", title, "Amount => ", amount, "Selected type => ", selectedType)
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
@@ -83,12 +87,13 @@ export function NewTransaction() {
             render={({ field: { onChange, value } }) => (
               <Input
                 bgColor="white"
-                placeholder="Quantidade $"
+                placeholder="EX: R$ 50,00"
                 onChangeText={onChange}
                 mb={errors.amount?.message ? 2 : 8}
                 fontWeight="medium"
                 value={value?.toString()}
                 type="text"
+                keyboardType="numeric"
                 fontSize="sm"
               />
             )}
@@ -104,6 +109,7 @@ export function NewTransaction() {
             alignItems="center"
             width="full"
             justifyContent="space-between"
+            mb={4}
           >
             <TouchableOpacity
               onPress={() => setSelectedType("LOSS")}
@@ -179,6 +185,7 @@ export function NewTransaction() {
               title="Cadastrar"
               backgroundColor="#fbbf24"
               textColor="#e4e4e7"
+              onSubmit={handleSubmit(handleNewTransaction)}
             />
           </Box>
       </VStack>
