@@ -1,4 +1,12 @@
-import { Box, FlatList, HStack, ScrollView, Text, VStack, useDisclose } from "native-base";
+import {
+  Box,
+  FlatList,
+  HStack,
+  ScrollView,
+  Text,
+  VStack,
+  useDisclose,
+} from "native-base";
 import { MainHeader } from "../components/MainHeader";
 import { TransactionCard } from "../components/TransactionCard";
 import { Button } from "../components/Button";
@@ -6,11 +14,10 @@ import { TransactionDetails } from "../components/TransactionDetails";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
 
-
-const fakeData = ['Teste 1', 'Teste 2', 'Teste 3', 'Teste 4', 'Teste 5']
+const fakeData = ["Teste 1", "Teste 2", "Teste 3", "Teste 4", "Teste 5"];
 
 export function Transactions() {
-  const { navigate } = useNavigation<AppNavigatorRoutesProps>()
+  const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
   return (
     <ScrollView
@@ -40,23 +47,24 @@ export function Transactions() {
             textColor="white"
             onSubmit={() => navigate("newTransaction")}
           />
-
         </VStack>
         <TransactionCard title="Total de gastos" amount={1200} mb={4} />
         <TransactionCard title="Balanço geral" amount={1400} mb={4} />
-        <TransactionCard title="Total de ganhos" amount={1300} mb={12} />
+        <TransactionCard title="Total de ganhos" amount={1300} mb={8} />
 
-        <Box p={4} bg="gray.700" borderRadius="md" display="flex" mt={4}>
-          <FlatList 
-            data={fakeData}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <TransactionDetails title={item} />
-            )}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 12 }}
-          />
-        </Box>
+        <Text color="gray.200" bold fontSize="lg" textAlign="center" mb={8}>
+          Transações
+        </Text>
+
+        <FlatList
+          data={fakeData}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => (
+            <TransactionDetails title={item} w="full" />
+          )}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 12 }}
+        />
       </VStack>
     </ScrollView>
   );

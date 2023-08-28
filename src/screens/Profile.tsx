@@ -76,9 +76,10 @@ export function Profile() {
         >
           <VStack display="flex" alignItems="center" justifyContent="center">
             <AvatarProfile
-              size="2xl"
+              size="xl"
               src="https://github.com/PedroFurlann.png"
               mb={2}
+              mt={2}
             />
             <Text color="amber.400" bold fontSize="md" mb={6}>
               Alterar foto de perfil

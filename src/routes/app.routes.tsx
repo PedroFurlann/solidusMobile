@@ -49,7 +49,7 @@ export function AppRoutes() {
               name="dollar-sign"
               color={color}
               size={20}
-              style={{ width: 28, height: 28 }}
+              style={{ width: 28, height: 28, marginLeft: 3 }}
             />
           ),
           tabBarLabel: ({ color }) => (
