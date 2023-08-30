@@ -1,1 +1,1 @@
-Solidus mobile app
+Solidus mobile app with expo
