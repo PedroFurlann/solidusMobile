@@ -1,1 +1,1 @@
-Solidus mobile app with expo
+Solidus mobile app made with expo and typescript
