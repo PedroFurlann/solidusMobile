@@ -23,6 +23,7 @@ export function Transactions() {
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
     >
       <MainHeader />
       <VStack flex={1} pb={10} bgColor="gray.900" px={12}>

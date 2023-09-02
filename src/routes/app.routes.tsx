@@ -7,15 +7,19 @@ import { Text, useTheme } from "native-base";
 
 import { Platform } from "react-native";
 import { Transactions } from "../screens/Transactions";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { NewTransaction } from "../screens/NewTransaction";
 import { Profile } from "../screens/Profile";
+import { CoinBot } from "../screens/CoinBot";
 
 type AppRoutes = {
   transactions: undefined;
   newTransaction: undefined;
   coinBot: undefined;
   profile: undefined;
+  transactionDetails: {
+    transactionId: string;
+  };
 };
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
@@ -55,6 +59,26 @@ export function AppRoutes() {
           tabBarLabel: ({ color }) => (
             <Text color={color} bold style={{ fontSize: 13 }}>
               Transações
+            </Text>
+          ),
+        }}
+      />
+
+      <Screen
+        name="coinBot"
+        component={CoinBot}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="robot-excited"
+              color={color}
+              size={20}
+              style={{ width: 28, height: 28, marginLeft: 6 }}
+            />
+          ),
+          tabBarLabel: ({ color }) => (
+            <Text color={color} bold style={{ fontSize: 13 }}>
+              Coin Bot
             </Text>
           ),
         }}

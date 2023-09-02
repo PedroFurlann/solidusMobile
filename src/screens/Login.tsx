@@ -61,6 +61,7 @@ export function Login() {
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
     >
       <AuthHeader />
       <VStack
