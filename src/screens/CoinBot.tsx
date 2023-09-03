@@ -11,6 +11,7 @@ import { MainHeader } from "../components/MainHeader";
 import { useState } from "react";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MainLoading } from "../components/Loading";
 
 interface Message {
   text: string;
@@ -22,6 +23,7 @@ export function CoinBot() {
     { text: "Olá, como posso te ajudar?", isUser: false },
   ]);
   const [inputMessage, setInputMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const addMessage = (text: string, isUser = false) => {
     setMessages([...messages, { text, isUser }]);
@@ -81,9 +83,16 @@ export function CoinBot() {
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
       stickyHeaderIndices={[0]}
+      
     >
       <MainHeader style={{ zIndex: 1 }} />
-      <VStack flex={1} pb={2} bgColor="gray.900" px={2} py={4}>
+      {loading ? (
+          <VStack flex={1} bgColor="gray.900" alignItems="center" justifyContent="center">
+            <MainLoading size="md" />
+          </VStack>
+      ): (
+        <>
+          <VStack flex={1} pb={2} bgColor="gray.900" px={2} py={4}>
         <VStack flex={1}  mb={4} my={2} px={2}  >
           {messages.map((message) => (
             <Box
@@ -127,7 +136,6 @@ export function CoinBot() {
           borderColor="gray.700"
           placeholderTextColor="#3f3f46"
           onChangeText={(text) => setInputMessage(text)}
-          outlineColor="transparent"
         />
         <MaterialCommunityIcons
           name="send-circle"
@@ -137,6 +145,8 @@ export function CoinBot() {
           onPress={handleSendMessage}
         />
       </HStack>
+        </>
+      )}
     </ScrollView>
   );
 }
