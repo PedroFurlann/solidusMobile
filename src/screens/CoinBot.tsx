@@ -1,4 +1,4 @@
-import { ScrollView, VStack } from "native-base";
+import { ScrollView, Toast, VStack } from "native-base";
 import { MainHeader } from "../components/MainHeader";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -17,10 +17,13 @@ export function CoinBot() {
   };
 
   async function handleSendMessage() {
-    if (!inputMessage.trim()) return;
+    if (!inputMessage.trim()) return Toast.show({
+      color: "red.500",
+      placement: "top",
+      title: "Digite uma mensagem para o coin bot!"
+    });
 
     addMessage(inputMessage, true);
-    setInputMessage('');
 
     try {
       const response = await axios.post(
@@ -46,11 +49,14 @@ export function CoinBot() {
         }
       );
 
-      const botMessage = response.data.choices[0].text;
-      addMessage(botMessage);
+      const botMessage = response.data.choices[0].message.content;
+      addMessage(botMessage, false);
 
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
+      addMessage("Erro ao se comunicar com o coin bot. Tente novamente mais tarde.", false)
+    } finally {
+      setInputMessage('')
     }
 
   }
