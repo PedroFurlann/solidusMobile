@@ -11,7 +11,7 @@ import { MainHeader } from "../components/MainHeader";
 import { useState } from "react";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MainLoading } from "../components/Loading";
+import { MainLoading } from "../components/MainLoading";
 
 interface Message {
   text: string;
