@@ -3,9 +3,10 @@ import { InterfaceBoxProps } from "native-base/lib/typescript/components/primiti
 
 interface Props extends InterfaceBoxProps {
   title: string;
+  category?: "FOOD" | "HEALTH" | "FUN" | "FIXED" | "EDUCATION" | "OTHERS"
 }
 
-export function TransactionDetails({ title, ...rest }: Props) {
+export function TransactionDetails({ title, category, ...rest  }: Props) {
   return (
     <Box
       bg="gray.600"

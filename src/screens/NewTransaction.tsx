@@ -1,13 +1,22 @@
-import { Box, Input, ScrollView, Text, VStack } from "native-base";
+import {
+  Box,
+  CheckIcon,
+  Input,
+  ScrollView,
+  Select,
+  Text,
+  VStack,
+} from "native-base";
 import { MainHeader } from "../components/MainHeader";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { Button } from "../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface FormData {
   title: string;
@@ -15,7 +24,9 @@ interface FormData {
 }
 
 export function NewTransaction() {
-  const [selectedType, setSelectedType] = useState("LOSS");
+  const [selectedType, setSelectedType] = useState("PROFIT");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryEmpty, setCategoryEmpty] = useState(false);
 
   const { goBack } = useNavigation();
 
@@ -37,13 +48,39 @@ export function NewTransaction() {
   } = useForm<FormData>({
     resolver: yupResolver(newTransactionSchema),
     defaultValues: {
-      amount: 100
-    }
+      amount: 100,
+    },
   });
 
   function handleNewTransaction({ title, amount }: FormData) {
-    console.log("Title => ", title, "Amount => ", amount, "Selected type => ", selectedType)
+    if (selectedCategory === "" && selectedType === "LOSS") {
+      setCategoryEmpty(true);
+      return;
+    }
+
+    console.log(
+      "Title => ",
+      title,
+      "Amount => ",
+      amount,
+      "Selected type => ",
+      selectedType,
+      "Selected category => ",
+      selectedCategory
+    );
   }
+
+  function verifyCategoryIsEmpty() {
+    if (selectedType === "") {
+      setCategoryEmpty(true);
+    } else {
+      setCategoryEmpty(false);
+    }
+  }
+
+  useEffect(() => {
+    verifyCategoryIsEmpty();
+  }, [selectedCategory]);
 
   return (
     <ScrollView
@@ -53,14 +90,13 @@ export function NewTransaction() {
     >
       <MainHeader />
       <VStack flex={1} pb={10} bgColor="gray.900" px={8}>
-        <Box display="flex" alignItems="center" justifyContent="center" flex={1}>
-          <Text
-            color="gray.200"
-            bold
-            fontFamily="heading"
-            pb={8}
-            fontSize="xl"
-          >
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flex={1}
+        >
+          <Text color="gray.200" bold fontFamily="heading" pb={8} fontSize="xl">
             Nova Transação
           </Text>
 
@@ -93,7 +129,7 @@ export function NewTransaction() {
                 bgColor="white"
                 placeholder="EX: R$ 50,00"
                 onChangeText={onChange}
-                mb={errors.amount?.message ? 2 : 8}
+                mb={errors.amount?.message ? 2 : 4}
                 fontWeight="medium"
                 value={value?.toString()}
                 type="text"
@@ -113,11 +149,9 @@ export function NewTransaction() {
             alignItems="center"
             width="full"
             justifyContent="space-between"
-            mb={4}
+            mb={selectedType === "LOSS" ? 6 : 8}
           >
-            <TouchableOpacity
-              onPress={() => setSelectedType("LOSS")}
-            >
+            <TouchableOpacity onPress={() => setSelectedType("LOSS")}>
               <Box
                 display="flex"
                 flexDirection="row"
@@ -142,7 +176,13 @@ export function NewTransaction() {
               </Box>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => setSelectedType("PROFIT")}>
+            <TouchableOpacity
+              onPress={() => {
+                setSelectedType("PROFIT");
+                setCategoryEmpty(false);
+                setSelectedCategory("");
+              }}
+            >
               <Box
                 display="flex"
                 flexDirection="row"
@@ -171,28 +211,70 @@ export function NewTransaction() {
           </Box>
         </Box>
 
-        <Box width="full">
-            <Button
-              title="Voltar"
-              backgroundColor="#ef4444"
-              textColor="#e4e4e7"
-              onSubmit={goBack}
-            >
-              <Feather
-                name="arrow-left-circle"
-                color="#e4e4e7"
+        <Box w="full">
+          <Select
+            selectedValue={selectedCategory}
+            accessibilityLabel="Escolha a categoria da sua transação"
+            placeholder="Escolha a categoria da sua transação"
+            _selectedItem={{
+              bg: "amber.400",
+              endIcon: <CheckIcon size="5" />,
+              borderRadius: 5,
+              fontSize: 16,
+            }}
+            mt={1}
+            onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+            bg="gray.200"
+            mb={categoryEmpty ? 2 : 8}
+            display={selectedType === "LOSS" ? "flex" : "none"}
+            fontSize="sm"
+            dropdownIcon={
+              <MaterialCommunityIcons
+                name="chevron-down"
                 size={22}
-                style={{ marginRight: 12, marginTop: 2 }}
+                style={{ marginRight: 12, width: 22, height: 22 }}
               />
-            </Button>
+            }
+            placeholderTextColor={"gray.700"}
+            pl={2}
+          >
+            <Select.Item label="Comida" value="FOOD" />
+            <Select.Item label="Saúde" value="HEALTH" />
+            <Select.Item label="Lazer" value="FUN" />
+            <Select.Item label="Educação" value="EDUCATION" />
+            <Select.Item label="Gastos fixos" value="FIXED" />
+            <Select.Item label="Outros" value="OTHERS" />
+          </Select>
+        </Box>
 
-            <Button
-              title="Cadastrar"
-              backgroundColor="#fbbf24"
-              textColor="#e4e4e7"
-              onSubmit={handleSubmit(handleNewTransaction)}
+        {categoryEmpty && (
+          <Text color="red.500" mb={6} fontWeight="bold">
+            Selecione a categoria da transação
+          </Text>
+        )}
+
+        <Box width="full">
+          <Button
+            title="Voltar"
+            backgroundColor="#ef4444"
+            textColor="#e4e4e7"
+            onSubmit={goBack}
+          >
+            <Feather
+              name="arrow-left-circle"
+              color="#e4e4e7"
+              size={22}
+              style={{ marginRight: 12, marginTop: 2 }}
             />
-          </Box>
+          </Button>
+
+          <Button
+            title="Cadastrar"
+            backgroundColor="#fbbf24"
+            textColor="#e4e4e7"
+            onSubmit={handleSubmit(handleNewTransaction)}
+          />
+        </Box>
       </VStack>
     </ScrollView>
   );
