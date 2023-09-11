@@ -133,8 +133,8 @@ export function CoinBot() {
           flex={1}
           color="gray.200"
           borderRadius="lg"
-          borderColor="gray.700"
-          placeholderTextColor="#3f3f46"
+          borderColor="gray.400"
+          placeholderTextColor="#767681"
           onChangeText={(text) => setInputMessage(text)}
         />
         <MaterialCommunityIcons

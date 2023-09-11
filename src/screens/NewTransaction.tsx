@@ -236,7 +236,7 @@ export function NewTransaction() {
               />
             }
             placeholderTextColor={"gray.700"}
-            pl={2}
+            pl={4}
           >
             <Select.Item label="Comida" value="FOOD" />
             <Select.Item label="Saúde" value="HEALTH" />
