@@ -7,6 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { priceFormatter } from "../utils/priceFormatter";
 import { PieChart } from "react-native-chart-kit";
+import { api } from "../services/api";
+import { storageTokenGet, storageTokenSave } from "../storage/storageToken";
 
 const fakeData = ["Teste 1", "Teste 2", "Teste 3", "Teste 4", "Teste 5"];
 
@@ -64,6 +66,16 @@ const data = [
 export function Transactions() {
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
+  async function handleRegister() {
+    try {
+      const response = await api.get("/transactions");
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
@@ -91,12 +103,11 @@ export function Transactions() {
             title="Nova transação"
             backgroundColor="#fbbf24"
             textColor="white"
-            onSubmit={() => navigate("newTransaction")}
+            onSubmit={handleRegister}
             style={{ marginBottom: 12 }}
           />
 
-          <View flex={1} alignItems="center" justifyContent="center">
-          </View>
+          <View flex={1} alignItems="center" justifyContent="center"></View>
         </VStack>
         <TransactionCard title="Total de gastos" amount={1200} mb={4} />
         <TransactionCard title="Balanço geral" amount={1400} mb={4} />

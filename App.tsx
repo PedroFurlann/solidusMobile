@@ -1,14 +1,13 @@
-import { NativeBaseProvider, StatusBar } from 'native-base'
-import { Login } from './src/screens/Login';
+import { NativeBaseProvider, StatusBar } from "native-base";
+import { Login } from "./src/screens/Login";
 import {
   useFonts,
   Roboto_400Regular,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-import { Register } from './src/screens/Register';
-import { Routes } from './src/routes';
-import { Transactions } from './src/screens/Transactions';
-import { NewTransaction } from './src/screens/NewTransaction';
+import { Routes } from "./src/routes";
+import { AuthContextProvider } from "./src/contexts/AuthContext";
+import { MainLoading } from "./src/components/MainLoading";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,7 +22,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded && <Routes />}
+      <AuthContextProvider>{fontsLoaded ? <Routes /> : <MainLoading size="md" />}</AuthContextProvider>
     </NativeBaseProvider>
-  )
-};
+  );
+}
