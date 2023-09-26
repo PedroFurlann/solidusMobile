@@ -70,19 +70,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }
 
   async function signOut() {
-    // try {
-    //   setIsLoadingUserStorageData(true);
-    //   setUser({} as UserDTO);
+    try {
+      setIsLoadingUserStorageData(true);
+      setUser({} as UserDTO);
 
-    //   await storageUserRemove();
-    //   await storageTokenRemove();
-    // } catch (error) {
-    //   throw error;
-    // } finally {
-    //   setIsLoadingUserStorageData(false);
-    // }
+      await storageUserRemove();
+      await storageTokenRemove();
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoadingUserStorageData(false);
+    }
 
-    console.log("Olá")
+    console.log("AQUII")
   }
 
   async function updateUserProfile(userUpdated: UserDTO) {

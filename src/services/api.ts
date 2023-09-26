@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { AppError } from "../utils/AppError";
-import { useAuth } from "../hooks/useAuth";
 import { storageTokenGet } from "../storage/storageToken";
 
 type SignOut = () => void;
@@ -21,7 +20,7 @@ api.registerInterceptTokenManager = (singOut) => {
 
       if (token) {
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      }g
+      }
 
       if (requestError.response?.status === 401) {
         if (

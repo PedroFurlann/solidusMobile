@@ -1,4 +1,4 @@
-import { Input, ScrollView, Text, VStack } from "native-base";
+import { Input, ScrollView, Text, Toast, VStack } from "native-base";
 import { AuthHeader } from "../components/AuthHeader";
 import { useEffect, useRef, useState } from "react";
 import LottieView from "lottie-react-native";
@@ -10,6 +10,9 @@ import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { TouchableNativeFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthNavigatorRoutesProps } from "../routes/auth.routes";
+import { useAuth } from "../hooks/useAuth";
+import { AppError } from "../utils/AppError";
+import { api } from "../services/api";
 
 interface FormData {
   name: string;
@@ -20,8 +23,11 @@ interface FormData {
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const { navigate } = useNavigation<AuthNavigatorRoutesProps>()
+
+  const { signIn } = useAuth()
 
   const animation = useRef<any>(null);
   useEffect(() => {
@@ -54,13 +60,32 @@ export function Register() {
     resolver: yupResolver(validationSchema),
   });
 
-  function handleRegister({
-    name,
-    email,
-    password,
-    confirm_password,
-  }: FormData) {
-    console.log(name, email, password, confirm_password);
+  async function handleRegister({ name, email, password }: FormData) {
+    let userData = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      setIsLoading(true)
+      await api.post("/user", userData);
+      await signIn(email, password)
+
+    } catch (error) {
+      setIsLoading(false)
+
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : "Não foi possível criar a conta. Tente novamente mais tarde.";
+
+      Toast.show({
+        title,
+        placement: "top",
+        bgColor: "red.500",
+      });
+    }
   }
 
   function handleGoToLogin() {
