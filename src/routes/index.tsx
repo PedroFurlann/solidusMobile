@@ -12,7 +12,8 @@ export function Routes() {
 
 
   if(isLoadingUserStorageData) {
-    <VStack
+    return (
+      <VStack
         flex={1}
         alignItems="center"
         justifyContent="center"
@@ -20,6 +21,7 @@ export function Routes() {
       >
         <MainLoading size="md" />
       </VStack>
+    )
   }
 
   const theme = DefaultTheme;
