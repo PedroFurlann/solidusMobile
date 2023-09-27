@@ -9,6 +9,7 @@ import { priceFormatter } from "../utils/priceFormatter";
 import { PieChart } from "react-native-chart-kit";
 import { api } from "../services/api";
 import { storageTokenGet, storageTokenSave } from "../storage/storageToken";
+import { useAuth } from "../hooks/useAuth";
 
 const fakeData = ["Teste 1", "Teste 2", "Teste 3", "Teste 4", "Teste 5"];
 
@@ -63,8 +64,13 @@ const data = [
   },
 ];
 
+
+
 export function Transactions() {
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+
+
+  const { signOut } = useAuth()
 
   async function handleRegister() {
     try {

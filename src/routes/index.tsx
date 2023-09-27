@@ -1,5 +1,5 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import { Box, useTheme } from "native-base";
+import { Box, VStack, useTheme } from "native-base";
 import { AuthRoutes } from "./auth.routes";
 import { AppRoutes } from "./app.routes";
 import { useAuth } from "../hooks/useAuth";
@@ -12,7 +12,14 @@ export function Routes() {
 
 
   if(isLoadingUserStorageData) {
-    return <MainLoading size="md" />
+    <VStack
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+        bgColor="gray.900"
+      >
+        <MainLoading size="md" />
+      </VStack>
   }
 
   const theme = DefaultTheme;

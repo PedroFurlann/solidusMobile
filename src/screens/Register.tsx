@@ -23,7 +23,6 @@ interface FormData {
 
 export function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
 
   const { navigate } = useNavigation<AuthNavigatorRoutesProps>()
 
@@ -38,7 +37,7 @@ export function Register() {
     name: yup
       .string()
       .required("O nome é obrigatório")
-      .min(5, "O nome deve conter no mímimo 5 caracteres"),
+      .min(6, "O nome deve conter no mímimo 6 caracteres"),
     email: yup
       .string()
       .required("O e-mail é obrigatório")
@@ -51,6 +50,7 @@ export function Register() {
       .string()
       .oneOf([yup.ref("password")], "As senhas devem coincidir"),
   });
+
 
   const {
     control,
@@ -68,13 +68,16 @@ export function Register() {
     };
 
     try {
-      setIsLoading(true)
       await api.post("/user", userData);
       await signIn(email, password)
 
-    } catch (error) {
-      setIsLoading(false)
+      Toast.show({
+        title: "Usuário criado com sucesso!",
+        placement: "top",
+        bgColor: "green.500",
+      })
 
+    } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
@@ -228,7 +231,7 @@ export function Register() {
 
         <Button
           backgroundColor="#fbbf24"
-          title="Confirmar"
+          title="Criar e acessar"
           onSubmit={handleSubmit(handleRegister)}
           textColor="white"
         />
