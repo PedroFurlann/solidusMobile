@@ -1,14 +1,16 @@
-import { IconButton, Input, ScrollView, Text, VStack } from "native-base";
+import {
+  IconButton,
+  Input,
+  ScrollView,
+  Text,
+  Toast,
+  VStack,
+} from "native-base";
 import { AuthHeader } from "../components/AuthHeader";
 import LottieView from "lottie-react-native";
 import GoogleIcon from "../assets/googlcon.svg";
 import { useEffect, useRef, useState } from "react";
-import {
-  Touchable,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedbackBase,
-} from "react-native";
+import { TouchableNativeFeedback } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +18,8 @@ import { Button } from "../components/Button";
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { AuthNavigatorRoutesProps } from "../routes/auth.routes";
+import { useAuth } from "../hooks/useAuth";
+import { AppError } from "../utils/AppError";
 
 interface FormData {
   email: string;
@@ -25,8 +29,9 @@ interface FormData {
 export function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const { navigate } = useNavigation<AuthNavigatorRoutesProps>()
+  const { navigate } = useNavigation<AuthNavigatorRoutesProps>();
 
+  const { signIn } = useAuth();
 
   const loginSchema = yup.object({
     email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
@@ -36,12 +41,30 @@ export function Login() {
       .min(6, "A senha deve ter no mínimo 6 caracteres."),
   });
 
-  function handleSignIn({ email, password }: FormData) {
-    console.log(email, password);
+  async function handleSignIn({ email, password }: FormData) {
+    try {
+      await signIn(email, password);
+      Toast.show({
+        title: "Usuário logado com sucesso!",
+        placement: "top",
+        bgColor: "green.500",
+      });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : "Não foi possível criar a conta. Tente novamente mais tarde.";
+
+      Toast.show({
+        title,
+        placement: "top",
+        bgColor: "red.500",
+      });
+    }
   }
 
   function handleGoToRegister() {
-    navigate('register')
+    navigate("register");
   }
 
   const {
@@ -124,7 +147,6 @@ export function Login() {
               onChangeText={onChange}
               value={value}
               mb={errors.password?.message ? 2 : 0}
-
               type="password"
               fontSize="sm"
               InputRightElement={

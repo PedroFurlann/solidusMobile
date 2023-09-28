@@ -81,8 +81,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     } finally {
       setIsLoadingUserStorageData(false);
     }
-
-    console.log("AQUII")
   }
 
   async function updateUserProfile(userUpdated: UserDTO) {
