@@ -18,24 +18,26 @@ export function Transactions() {
 
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
-  const { user } = useAuth()
+  const { user } = useAuth();
 
-  let totalProfit: number = 0
+  let totalProfit: number = 0;
   let totalLoss: number = 0;
 
   transactions.forEach((transaction) => {
-    if(transaction.type === "PROFIT") {
-      totalProfit += transaction.amount
-    }  
-
-    if(transaction.type === "LOSS") {
-      totalLoss += transaction.amount
+    if (transaction.type === "PROFIT") {
+      totalProfit += transaction.amount;
     }
-  })
+
+    if (transaction.type === "LOSS") {
+      totalLoss += transaction.amount;
+    }
+  });
 
   const finalAmount: number = totalProfit + totalLoss;
 
-  console.log(totalProfit, totalLoss)
+  console.log(totalProfit, totalLoss);
+
+  
 
   async function fetchTransactions() {
     setLoading(true);
@@ -110,14 +112,21 @@ export function Transactions() {
 
               <View flex={1} alignItems="center" justifyContent="center"></View>
             </VStack>
-            <TransactionCard title="Total de gastos" amount={totalLoss} mb={4} />
-            <TransactionCard title="Balanço geral" amount={finalAmount} mb={4} />
-            <TransactionCard title="Total de ganhos" amount={totalProfit} mb={8} />
-
-            <Text color="gray.200" bold fontSize="lg" textAlign="center" mb={8}>
-              Transações
-            </Text>
-
+            <TransactionCard
+              title="Total de gastos"
+              amount={totalLoss}
+              mb={4}
+            />
+            <TransactionCard
+              title="Balanço geral"
+              amount={finalAmount}
+              mb={4}
+            />
+            <TransactionCard
+              title="Total de ganhos"
+              amount={totalProfit}
+              mb={8}
+            />
             <FlatList
               data={transactions}
               keyExtractor={(item) => item.id.toString()}
@@ -131,6 +140,28 @@ export function Transactions() {
               )}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ gap: 16 }}
+              ListHeaderComponent={
+                <Text
+                  color="gray.200"
+                  bold
+                  fontSize="lg"
+                  textAlign="center"
+                  mb={4}
+                >
+                  Transações
+                </Text>
+              }
+              ListEmptyComponent={
+                <Text
+                  color="gray.200"
+                  bold
+                  fontFamily="heading"
+                  fontSize="lg"
+                  textAlign="center"
+                >
+                  Voce ainda não tem nenhuma transação. Que tal cadastrar uma?
+                </Text>
+              }
             />
           </VStack>
         </ScrollView>

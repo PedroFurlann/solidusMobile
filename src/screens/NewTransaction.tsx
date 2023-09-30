@@ -22,6 +22,8 @@ import { api } from "../services/api";
 import { AppError } from "../utils/AppError";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { MainLoading } from "../components/MainLoading";
+import { priceFormatter } from "../utils/priceFormatter";
+import CurrencyInput from "react-native-currency-input";
 
 interface FormData {
   title: string;
@@ -33,6 +35,16 @@ export function NewTransaction() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoryEmpty, setCategoryEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
 
   const { goBack, navigate } = useNavigation<AppNavigatorRoutesProps>();
 
@@ -177,16 +189,30 @@ export function NewTransaction() {
                 control={control}
                 name="amount"
                 render={({ field: { onChange, value } }) => (
-                  <Input
-                    bgColor="white"
-                    placeholder="EX: R$ 50,00"
-                    onChangeText={onChange}
-                    mb={errors.amount?.message ? 2 : 4}
-                    fontWeight="medium"
-                    value={value?.toString()}
-                    type="text"
+                  <CurrencyInput
+                    style={{
+                      backgroundColor: "white",
+                      width: "100%",
+                      fontWeight: "bold",
+                      borderRadius: 4,
+                      padding: 9,
+                      fontSize: 14,
+                      marginBottom: errors.amount?.message ? 8 : 0,
+                      borderWidth: isFocused ? 1 : 0,
+                      borderColor: isFocused ? "#a5f3fc" : "black"
+
+                    }}
+                    value={value}
+                    placeholder="R$ 0,00"
+                    onChangeValue={onChange}
+          selectionColor="black"
+                    prefix="R$ "
+                    delimiter=","
+                    separator="."
                     keyboardType="numeric"
-                    fontSize="sm"
+                    precision={2}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
                   />
                 )}
               />
@@ -329,7 +355,7 @@ export function NewTransaction() {
                 onSubmit={handleSubmit(handleNewTransaction)}
                 iconLeft={false}
               >
-                 <Feather
+                <Feather
                   name="plus-circle"
                   color="#e4e4e7"
                   size={22}
