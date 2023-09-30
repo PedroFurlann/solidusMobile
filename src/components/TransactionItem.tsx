@@ -1,29 +1,38 @@
+import { Dayjs } from "dayjs";
 import { Box, Text } from "native-base";
 import { InterfaceBoxProps } from "native-base/lib/typescript/components/primitives/Box";
+import { Button } from "./Button";
+import { TouchableOpacity } from "react-native";
 
 interface Props extends InterfaceBoxProps {
+  idTransaction: number;
   title: string;
-  category?: "FOOD" | "HEALTH" | "FUN" | "FIXED" | "EDUCATION" | "OTHERS"
+  type: string;
+  category: string;
+  amount: number;
+  createdAt: Dayjs
 }
 
-export function TransactionDetails({ title, category, ...rest  }: Props) {
+export function TransactionItem({ title, type, ...rest  }: Props) {
   return (
-    <Box
+   <TouchableOpacity>
+     <Box
       bg="gray.600"
       display="flex"
       flexDirection="row"
       rounded="md"
       alignItems="center"
-      p={2}
+      p={3}
       justifyContent="space-between"
       {...rest}
     >
       <Text color="gray.200" bold fontSize="md">
         {title}
       </Text>
-      <Text color="gray.200" bold fontSize="md">
-        20/08/2023
+      <Text color={type === "PROFIT" ? "amber.400" : "red.500"} bold fontSize="md">
+        {type === "PROFIT" ? "Lucro" : "Gasto"}
       </Text>
     </Box>
+   </TouchableOpacity>
   );
 }

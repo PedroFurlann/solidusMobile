@@ -53,7 +53,7 @@ export function Login() {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
-        : "Não foi possível criar a conta. Tente novamente mais tarde.";
+        : "Não foi possível realizar o login. Tente novamente mais tarde.";
 
       Toast.show({
         title,
