@@ -3,10 +3,10 @@ import { MainHeader } from "../components/MainHeader";
 import { TransactionCard } from "../components/TransactionCard";
 import { Button } from "../components/Button";
 import { TransactionItem } from "../components/TransactionItem";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { AppError } from "../utils/AppError";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Dayjs } from "dayjs";
 import { api } from "../services/api";
 import { MainLoading } from "../components/MainLoading";
@@ -39,7 +39,7 @@ export function Transactions() {
     }
   })
 
-  const finalAmount: number = totalProfit - totalLoss;
+  const finalAmount: number = totalProfit + totalLoss;
 
   console.log(totalProfit, totalLoss)
 
@@ -66,9 +66,11 @@ export function Transactions() {
     }
   }
 
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTransactions();
+    }, [])
+  );
 
   return (
     <>

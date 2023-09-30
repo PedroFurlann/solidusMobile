@@ -27,7 +27,7 @@ export function TransactionItem({ title, type, ...rest  }: Props) {
       {...rest}
     >
       <Text color="gray.200" bold fontSize="md">
-        {title}
+        {title.charAt(0).toUpperCase() + title.slice(1)}
       </Text>
       <Text color={type === "PROFIT" ? "amber.400" : "red.500"} bold fontSize="md">
         {type === "PROFIT" ? "Lucro" : "Gasto"}

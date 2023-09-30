@@ -26,7 +26,7 @@ export function TransactionCard({ title, amount, ...rest }: Props) {
       {amount < 0 ? (
         <HStack display="flex" alignItems="center">
           <Text color="red.500" bold marginRight={2} fontSize="md">
-            - {priceFormatter.format(amount)}
+            {priceFormatter.format(amount).replace("-", "- ")}
           </Text>
           <Feather name="arrow-down-circle" color="#ef4444" size={18} />
         </HStack>
