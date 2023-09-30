@@ -7,24 +7,18 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { AppError } from "../utils/AppError";
 import { useCallback, useEffect, useState } from "react";
-import { Dayjs } from "dayjs";
 import { api } from "../services/api";
 import { MainLoading } from "../components/MainLoading";
-
-interface Transactions {
-  id: number;
-  title: string;
-  type: string;
-  category: string;
-  amount: number;
-  createdAt: Dayjs;
-}
+import { TransactionDTO } from "../dtos/TransactionDTO";
+import { useAuth } from "../hooks/useAuth";
 
 export function Transactions() {
-  const [transactions, setTransactions] = useState<Transactions[]>([]);
+  const [transactions, setTransactions] = useState<TransactionDTO[]>([]);
   const [loading, setLoading] = useState(false);
 
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+
+  const { user } = useAuth()
 
   let totalProfit: number = 0
   let totalLoss: number = 0;
@@ -104,7 +98,7 @@ export function Transactions() {
                 mt={4}
                 mb={4}
               >
-                Essas é o resumo de suas transações Pedro
+                Essas é o resumo de suas transações {user.name}
               </Text>
               <Button
                 title="Nova transação"
@@ -130,11 +124,8 @@ export function Transactions() {
               renderItem={({ item }) => (
                 <TransactionItem
                   title={item.title}
-                  category={item.category}
                   type={item.type}
                   idTransaction={item.id}
-                  amount={item.amount}
-                  createdAt={item.createdAt}
                   w="full"
                 />
               )}

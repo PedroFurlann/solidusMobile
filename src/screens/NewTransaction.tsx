@@ -294,7 +294,7 @@ export function NewTransaction() {
               >
                 <Select.Item label="Comida" value="FOOD" />
                 <Select.Item label="Saúde" value="HEALTH" />
-                <Select.Item label="Lazer" value="FUN" />
+                <Select.Item label="Lazer" value="FUNNY" />
                 <Select.Item label="Educação" value="EDUCATION" />
                 <Select.Item label="Gastos fixos" value="FIXED" />
                 <Select.Item label="Outros" value="OTHERS" />
@@ -310,7 +310,7 @@ export function NewTransaction() {
             <Box width="full">
               <Button
                 title="Voltar"
-                backgroundColor="#ef4444"
+                backgroundColor="#fbbf24"
                 textColor="#e4e4e7"
                 onSubmit={goBack}
               >
@@ -323,11 +323,19 @@ export function NewTransaction() {
               </Button>
 
               <Button
-                title="Cadastrar"
+                title="Cadastrar transação"
                 backgroundColor="#fbbf24"
                 textColor="#e4e4e7"
                 onSubmit={handleSubmit(handleNewTransaction)}
-              />
+                iconLeft={false}
+              >
+                 <Feather
+                  name="plus-circle"
+                  color="#e4e4e7"
+                  size={22}
+                  style={{ marginLeft: 12, marginTop: 2 }}
+                />
+              </Button>
             </Box>
           </VStack>
         </ScrollView>

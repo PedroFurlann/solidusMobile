@@ -1,21 +1,24 @@
-import { Dayjs } from "dayjs";
+import { useNavigation } from "@react-navigation/native";
 import { Box, Text } from "native-base";
 import { InterfaceBoxProps } from "native-base/lib/typescript/components/primitives/Box";
-import { Button } from "./Button";
 import { TouchableOpacity } from "react-native";
+import { AppNavigatorRoutesProps } from "../routes/app.routes";
 
 interface Props extends InterfaceBoxProps {
   idTransaction: number;
   title: string;
   type: string;
-  category: string;
-  amount: number;
-  createdAt: Dayjs
 }
 
-export function TransactionItem({ title, type, ...rest  }: Props) {
+export function TransactionItem({ title, type, idTransaction, ...rest  }: Props) {
+  const { navigate } = useNavigation<AppNavigatorRoutesProps>()
+
+  function goToTransactionDetails() {
+    navigate("transactionDetails", { transactionId: idTransaction })
+  }
+
   return (
-   <TouchableOpacity>
+   <TouchableOpacity onPress={goToTransactionDetails}>
      <Box
       bg="gray.600"
       display="flex"

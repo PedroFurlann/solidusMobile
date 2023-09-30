@@ -11,6 +11,7 @@ import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { NewTransaction } from "../screens/NewTransaction";
 import { Profile } from "../screens/Profile";
 import { CoinBot } from "../screens/CoinBot";
+import { TransactionDetails } from "../screens/TransactionDetails";
 
 type AppRoutes = {
   transactions: undefined;
@@ -18,7 +19,7 @@ type AppRoutes = {
   coinBot: undefined;
   profile: undefined;
   transactionDetails: {
-    transactionId: string;
+    transactionId: number;
   };
 };
 
@@ -107,6 +108,12 @@ export function AppRoutes() {
       <Screen
         name="newTransaction"
         component={NewTransaction}
+        options={{ tabBarButton: () => null }}
+      />
+
+    <Screen
+        name="transactionDetails"
+        component={TransactionDetails}
         options={{ tabBarButton: () => null }}
       />
     </Navigator>
