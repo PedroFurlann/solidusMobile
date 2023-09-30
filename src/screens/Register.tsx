@@ -33,22 +33,22 @@ export function Register() {
     animation.current?.play();
   }, []);
 
-  const validationSchema = yup.object().shape({
+  const registerSchema = yup.object().shape({
     name: yup
       .string()
-      .required("O nome é obrigatório")
-      .min(6, "O nome deve conter no mímimo 6 caracteres"),
+      .required("O nome é obrigatório.")
+      .min(6, "O nome deve conter no mímimo 6 caracteres."),
     email: yup
       .string()
-      .required("O e-mail é obrigatório")
-      .email("Digite um e-mail válido"),
+      .required("O e-mail é obrigatório.")
+      .email("Digite um e-mail válido."),
     password: yup
       .string()
-      .required("A senha é obrigatória")
-      .min(6, "A senha deve conter no mínimo 6 caracteres"),
+      .required("A senha é obrigatória.")
+      .min(6, "A senha deve conter no mínimo 6 caracteres."),
     confirm_password: yup
       .string()
-      .oneOf([yup.ref("password")], "As senhas devem coincidir"),
+      .oneOf([yup.ref("password")], "As senhas devem coincidir."),
   });
 
 
@@ -57,7 +57,7 @@ export function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(registerSchema),
   });
 
   async function handleRegister({ name, email, password }: FormData) {

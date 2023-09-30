@@ -39,17 +39,19 @@ export function NewTransaction() {
   const newTransactionSchema = yup.object({
     title: yup
       .string()
+      .trim()
       .required("Informe o título da transação.")
-      .min(6, "O título da transação deve ter no mínimo 6 caracteres"),
+      .min(6, "O título da transação deve ter no mínimo 6 caracteres."),
     amount: yup
       .number()
-      .required("Informe a quantidade transacionada")
-      .min(1, "A quantidade transacionada deve ser maior que 0"),
+      .required("Informe a quantidade transacionada.")
+      .min(1, "A quantidade transacionada deve ser maior que 0."),
   });
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(newTransactionSchema),
@@ -77,6 +79,10 @@ export function NewTransaction() {
       await api.post("/transactions", transactionData);
 
       navigate("transactions");
+
+      setSelectedCategory("");
+      setSelectedType("PROFIT");
+      reset();
 
       Toast.show({
         title: "Transação criada com sucesso.",

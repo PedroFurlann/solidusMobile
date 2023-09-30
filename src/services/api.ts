@@ -24,8 +24,10 @@ api.registerInterceptTokenManager = (singOut) => {
 
       if (requestError.response?.status === 401) {
         if (
-          requestError.response.data?.message === "Formato de token inválido" ||
-          requestError.response.data?.message === "Token inválido"
+          requestError.response.data?.message ===
+            "Formato de token inválido. Faça login novamente." ||
+          requestError.response.data?.message ===
+            "Sua sessão expirou. Por favor, faça login novamente."
         ) {
           singOut();
         }

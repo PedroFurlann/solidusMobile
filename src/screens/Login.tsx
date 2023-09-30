@@ -34,10 +34,11 @@ export function Login() {
   const { signIn } = useAuth();
 
   const loginSchema = yup.object({
-    email: yup.string().required("Informe o e-mail.").email("E-mail inválido."),
+    email: yup.string().required("Informe o e-mail.").email("E-mail inválido.").trim(),
     password: yup
       .string()
       .required("Informe a senha.")
+      .trim()
       .min(6, "A senha deve ter no mínimo 6 caracteres."),
   });
 
