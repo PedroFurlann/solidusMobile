@@ -8,11 +8,12 @@ import {
   VStack,
 } from "native-base";
 import { MainHeader } from "../components/MainHeader";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MainLoading } from "../components/MainLoading";
 import { useAuth } from "../hooks/useAuth";
+import { useFocusEffect } from "@react-navigation/native";
 
 interface Message {
   text: string;
@@ -24,7 +25,7 @@ export function CoinBot() {
 
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: `Olá ${user.name} meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
+      text: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
       isUser: false,
     },
   ]);

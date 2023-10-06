@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TouchableNativeFeedback, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
@@ -77,8 +77,10 @@ export function Profile() {
     setLoading(true);
 
     try {
+      console.log(userData)
+
       await api.patch("/user", userData);
-      updateUserProfile(userUpdated);
+      await updateUserProfile(userUpdated);
 
       Toast.show({
         title: "Usuário atualizado com sucesso!",
@@ -86,7 +88,6 @@ export function Profile() {
         bgColor: "green.500",
       });
 
-      reset()
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
