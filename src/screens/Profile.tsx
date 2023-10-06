@@ -1,4 +1,4 @@
-import { Input, ScrollView, Text, Toast, VStack } from "native-base";
+import { Box, Input, ScrollView, Text, Toast, VStack } from "native-base";
 import { MainHeader } from "../components/MainHeader";
 import { AvatarProfile } from "../components/AvatarProfile";
 import * as yup from "yup";
@@ -6,7 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TouchableNativeFeedback, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "../components/Button";
 import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api";
@@ -24,7 +24,7 @@ export function Profile() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const { user, updateUserProfile } = useAuth();
+  const { user, updateUserProfile, signOut } = useAuth();
 
   const updateProfileSchema = yup.object().shape({
     name: yup
@@ -121,7 +121,7 @@ export function Profile() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          <MainHeader />
+          <MainHeader style={{ marginBottom: 24 }} />
           <VStack flex={1} pb={10} bgColor="gray.900" px={12}>
             <VStack
               display="flex"
@@ -251,12 +251,33 @@ export function Profile() {
                 {errors.confirm_new_password?.message}
               </Text>
 
+              <Box width="full">
               <Button
                 backgroundColor="#fbbf24"
                 title="Atualizar perfil"
                 onSubmit={handleSubmit(handleUpdateProfile)}
                 textColor="#fff"
               />
+
+              <Button
+                title="Sair"
+                backgroundColor="#ef4444"
+                textColor="#e4e4e7"
+                onSubmit={async () => {
+                  await signOut()
+                }}
+                iconLeft={false}
+              >
+                <MaterialCommunityIcons
+                  name="door-open"
+                  color="#e4e4e7"
+                  size={22}
+                  style={{ marginLeft: 12, marginTop: 2 }}
+                />
+              </Button>
+            </Box>
+
+              
             </VStack>
           </VStack>
         </ScrollView>
