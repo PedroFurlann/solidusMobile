@@ -178,11 +178,11 @@ export function Login() {
         />
 
         <Button
-          title="Entrar com a conta Google"
-          backgroundColor="white"
-          fontWeight="normal"
+          title="Esqueceu sua senha?"
+          backgroundColor="#fbbf24"
+          textColor="white"
+          onSubmit={() => navigate("forgotPassword")}
         >
-          <GoogleIcon style={{ width: 20, height: 20, marginRight: 16 }} />
         </Button>
 
         <Button
