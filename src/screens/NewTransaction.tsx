@@ -45,7 +45,6 @@ export function NewTransaction() {
     setIsFocused(false);
   };
 
-
   const { goBack, navigate } = useNavigation<AppNavigatorRoutesProps>();
 
   const newTransactionSchema = yup.object({
@@ -57,7 +56,7 @@ export function NewTransaction() {
     amount: yup
       .number()
       .required("Informe a quantidade transacionada.")
-      .min(1, "A quantidade transacionada deve ser maior que 0."),
+      .min(1, "A quantidade transacionada deve ser maior que 0"),
   });
 
   const {
@@ -97,7 +96,7 @@ export function NewTransaction() {
       reset();
 
       Toast.show({
-        title: "Transação criada com sucesso.",
+        title: "Transação criada com sucesso!",
         placement: "top",
         bgColor: "green.500",
       });
@@ -199,13 +198,12 @@ export function NewTransaction() {
                       fontSize: 14,
                       marginBottom: errors.amount?.message ? 8 : 0,
                       borderWidth: isFocused ? 1 : 0,
-                      borderColor: isFocused ? "#a5f3fc" : "black"
-
+                      borderColor: isFocused ? "#a5f3fc" : "black",
                     }}
                     value={value}
                     placeholder="R$ 0,00"
                     onChangeValue={onChange}
-          selectionColor="black"
+                    selectionColor="black"
                     prefix="R$ "
                     delimiter=","
                     separator="."

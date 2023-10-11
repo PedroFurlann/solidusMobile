@@ -200,7 +200,7 @@ export function Profile() {
                 render={({ field: { onChange, value } }) => (
                   <Input
                     bgColor="white"
-                    placeholder="Digite sua nova senha"
+                    placeholder="Nova senha"
                     secureTextEntry={!showPassword}
                     value={value}
                     type="password"

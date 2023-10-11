@@ -34,12 +34,12 @@ export function Login() {
   const { signIn } = useAuth();
 
   const loginSchema = yup.object({
-    email: yup.string().required("Informe o e-mail.").email("E-mail inválido.").trim(),
+    email: yup.string().required("O e-mail é obrigatório.").email("Digite um e-mail válido.").trim(),
     password: yup
       .string()
-      .required("Informe a senha.")
+      .required("A senha é obrigatória.")
       .trim()
-      .min(6, "A senha deve ter no mínimo 6 caracteres."),
+      .min(6, "A senha deve conter no mínimo 6 caracteres."),
   });
 
   async function handleSignIn({ email, password }: FormData) {
@@ -115,7 +115,7 @@ export function Login() {
         <Controller
           control={control}
           name="email"
-          rules={{ required: "Informe o e-mail" }}
+          rules={{ required: "O e-mail é obrigatório." }}
           render={({ field: { onChange, value } }) => (
             <Input
               bgColor="white"
@@ -138,7 +138,7 @@ export function Login() {
         <Controller
           control={control}
           name="password"
-          rules={{ required: "Informe a senha" }}
+          rules={{ required: "A senha é obrigatória." }}
           render={({ field: { onChange, value } }) => (
             <Input
               bgColor="white"

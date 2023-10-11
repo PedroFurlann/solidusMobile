@@ -21,8 +21,8 @@ export function ForgotPassword() {
   const validateSchema = yup.object({
     email: yup
       .string()
-      .required("Informe o e-mail.")
-      .email("E-mail inválido.")
+      .required("O e-mail é obrigatório.")
+      .email("Digite um e-mail válido.")
       .trim(),
   });
 
@@ -104,7 +104,7 @@ export function ForgotPassword() {
             <Controller
               control={control}
               name="email"
-              rules={{ required: "Informe o e-mail" }}
+              rules={{ required: "O e-mail é obrigatório." }}
               render={({ field: { onChange, value } }) => (
                 <Input
                   bgColor="white"

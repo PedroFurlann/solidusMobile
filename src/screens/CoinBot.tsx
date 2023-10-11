@@ -64,7 +64,7 @@ export function CoinBot() {
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_GPT_KEY}`,
+            Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_GPT_KEY}`,
             "Content-Type": "application/json",
           },
         }
