@@ -205,8 +205,8 @@ export function NewTransaction() {
                     onChangeValue={onChange}
                     selectionColor="black"
                     prefix="R$ "
-                    delimiter=","
-                    separator="."
+                    delimiter="."
+                    separator=","
                     keyboardType="numeric"
                     precision={2}
                     onBlur={handleBlur}
