@@ -18,7 +18,7 @@ interface FormData {
   name: string;
   email: string;
   password: string;
-  confirm_password: string;
+  confirm_password?: string;
 }
 
 export function Register() {
@@ -231,7 +231,7 @@ export function Register() {
 
         <Button
           backgroundColor="#fbbf24"
-          title="Criar e acessar"
+          title="Cadastrar-se"
           onSubmit={handleSubmit(handleRegister)}
           textColor="white"
         />

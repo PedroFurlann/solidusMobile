@@ -46,7 +46,7 @@ export function Login() {
     try {
       await signIn(email, password);
       Toast.show({
-        title: "Usuário logado com sucesso!",
+        title: "Login realizado com sucesso!",
         placement: "top",
         bgColor: "green.500",
       });

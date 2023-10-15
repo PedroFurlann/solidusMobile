@@ -16,8 +16,8 @@ import { MainLoading } from "../components/MainLoading";
 interface FormData {
   name: string;
   email: string;
-  new_password: string;
-  confirm_new_password: string;
+  new_password?: string;
+  confirm_new_password?: string;
 }
 
 export function Profile() {
@@ -30,6 +30,7 @@ export function Profile() {
     name: yup
       .string()
       .trim()
+      .required("O nome é obrigatório.")
       .min(6, "O nome deve conter no mímimo 6 caracteres."),
     email: yup
       .string()

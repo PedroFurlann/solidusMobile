@@ -50,7 +50,7 @@ export function Transactions() {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
-        : "Não foi possível criar a transação. Tente novamente mais tarde.";
+        : "Não foi possível carregar as transações. Tente novamente mais tarde.";
 
       Toast.show({
         title,
