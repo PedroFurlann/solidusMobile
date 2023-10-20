@@ -109,7 +109,7 @@ export function Login() {
           fontFamily="heading"
           fontSize="2xl"
         >
-          Faça Login
+          Login
         </Text>
 
         <Controller
