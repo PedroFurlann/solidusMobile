@@ -3,6 +3,7 @@ import {
   HStack,
   Input,
   ScrollView,
+  Spinner,
   Text,
   Toast,
   VStack,
@@ -19,6 +20,12 @@ interface Message {
   text: string;
   isUser: boolean;
 }
+
+const loadingDotsStyle = {
+  fontSize: "12px",
+  margin: "0 5px",
+  animation: "spin 1s infinite linear",
+};
 
 export function CoinBot() {
   const { user } = useAuth();
@@ -41,12 +48,13 @@ export function CoinBot() {
       });
 
     const newMessage = { text: inputMessage, isUser: true };
-    const newMessages = [...messages, newMessage]; 
+    const newMessages = [...messages, newMessage];
 
+    setMessages(newMessages);
     setInputMessage("");
 
     try {
-      setLoading(true)
+      setLoading(true);
 
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
@@ -90,7 +98,7 @@ export function CoinBot() {
 
       setMessages(newMessages);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -110,7 +118,7 @@ export function CoinBot() {
                 key={`message.text - ${i}`}
                 bgColor="amber.400"
                 borderRadius="2xl"
-                w="1/2"
+                maxW="2/3"
                 p={2}
                 mb={2}
                 mt={4}
@@ -128,7 +136,6 @@ export function CoinBot() {
               <Box
                 bgColor="amber.400"
                 borderRadius="2xl"
-                w="1/2"
                 p={2}
                 mb={2}
                 mt={4}
@@ -137,9 +144,7 @@ export function CoinBot() {
                 justifyContent="center"
                 alignSelf="flex-start"
               >
-                <Text bold fontSize="sm">
-                  Carregando...
-                </Text>
+            <Spinner size="sm" color="black" fontWeight="bold" />
               </Box>
             )}
           </VStack>
