@@ -32,8 +32,8 @@ export function TransactionItem({ title, type, idTransaction, ...rest  }: Props)
       <Text color="gray.200" bold fontSize="md">
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </Text>
-      <Text color={type === "PROFIT" ? "amber.400" : "red.500"} bold fontSize="md">
-        {type === "PROFIT" ? "Lucro" : "Gasto"}
+      <Text color={type === "PROFIT" ? "amber.400" : "red.500"} bold fontSize="md" underline>
+        Ver detalhes
       </Text>
     </Box>
    </TouchableOpacity>
