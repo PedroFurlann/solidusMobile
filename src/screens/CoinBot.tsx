@@ -9,7 +9,7 @@ import {
   VStack,
 } from "native-base";
 import { MainHeader } from "../components/MainHeader";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useAuth } from "../hooks/useAuth";
@@ -124,7 +124,9 @@ export function CoinBot() {
     }
   }
 
-  async function getMessagesHistoric() {
+  console.log(messages.length);
+
+  async function getHistoricMessages() {
     setLoading(true);
 
     try {
@@ -162,7 +164,7 @@ export function CoinBot() {
           isUserMessage: false,
         },
       ]);
-      getMessagesHistoric();
+      getHistoricMessages();
       Toast.show({
         bgColor: "green.500",
         placement: "top",
@@ -198,11 +200,9 @@ export function CoinBot() {
     ]);
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      getMessagesHistoric();
-    }, [])
-  );
+  useEffect(() => {
+    getHistoricMessages()
+  }, [])
 
   return (
     <>
@@ -231,7 +231,7 @@ export function CoinBot() {
                   onPress={handleDeleteTransaction}
                 >
                   <Box
-                    bgColor="red.500"
+                    bgColor={loading || messages.length <= 1 || loadingMessages ? "gray.400" : "red.500"}
                     borderRadius="2xl"
                     p={2}
                     mb={6}
@@ -306,6 +306,9 @@ export function CoinBot() {
                 placeholderTextColor="#767681"
                 onChangeText={(text) => setInputMessage(text)}
                 isDisabled={loadingMessages}
+                _disabled={{
+                  opacity: 0.7,
+                }}
               />
               <MaterialCommunityIcons
                 name="send-circle"
