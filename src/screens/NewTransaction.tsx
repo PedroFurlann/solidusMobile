@@ -52,7 +52,7 @@ export function NewTransaction() {
       .string()
       .trim()
       .required("Informe o título da transação.")
-      .min(6, "O título da transação deve ter no mínimo 6 caracteres."),
+      .min(3, "O título da transação deve ter no mínimo 3 caracteres."),
     amount: yup
       .number()
       .required("Informe a quantidade transacionada.")
@@ -66,9 +66,6 @@ export function NewTransaction() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(newTransactionSchema),
-    defaultValues: {
-      amount: 100,
-    },
   });
 
   async function handleNewTransaction({ title, amount }: FormData) {

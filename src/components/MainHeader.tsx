@@ -1,5 +1,4 @@
 import { HStack, Image } from "native-base";
-import Logo from "../assets/logo.png";
 import { AvatarProfile } from "./AvatarProfile";
 import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
 
@@ -18,7 +17,7 @@ export function MainHeader({...rest}: Props) {
     >
       <AvatarProfile
         size="md"
-        src="https://github.com/PedroFurlann.png"
+        src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
       />
     </HStack>
   );

@@ -62,8 +62,6 @@ export function CoinBot() {
     const newMessage = { content: inputMessage, isUserMessage: true };
     const newMessages = [...messages, newMessage];
 
-    console.log(newMessages);
-
     setMessages(newMessages);
     setInputMessage("");
 
@@ -98,8 +96,6 @@ export function CoinBot() {
         }
       );
 
-      console.log(response.data.choices[0].message.content);
-
       await api.post("/messages", {
         content: response.data.choices[0].message.content,
         isUserMessage: false,
@@ -123,8 +119,6 @@ export function CoinBot() {
       setLoadingMessages(false);
     }
   }
-
-  console.log(messages.length);
 
   async function getHistoricMessages() {
     setLoading(true);

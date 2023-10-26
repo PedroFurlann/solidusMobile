@@ -25,11 +25,11 @@ export function Transactions() {
 
   transactions.forEach((transaction) => {
     if (transaction.type === "PROFIT") {
-      totalProfit += transaction.amount;
+      totalProfit += Number(transaction.amount);
     }
 
     if (transaction.type === "LOSS") {
-      totalLoss += transaction.amount;
+      totalLoss += Number(transaction.amount);
     }
   });
 

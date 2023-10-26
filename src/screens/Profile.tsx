@@ -12,6 +12,7 @@ import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api";
 import { AppError } from "../utils/AppError";
 import { MainLoading } from "../components/MainLoading";
+import UserPlacehodlerImage from '../assets/Portrait_Placeholder.png'
 
 interface FormData {
   name: string;
@@ -137,15 +138,10 @@ export function Profile() {
               >
                 <AvatarProfile
                   size="xl"
-                  src="https://github.com/PedroFurlann.png"
-                  mb={2}
+                  src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                  mb={8}
                   mt={2}
                 />
-                <TouchableOpacity>
-                  <Text color="amber.400" bold fontSize="md" mb={6}>
-                    Alterar foto de perfil
-                  </Text>
-                </TouchableOpacity>
               </VStack>
 
               <Controller
