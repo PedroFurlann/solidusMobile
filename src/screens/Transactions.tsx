@@ -86,7 +86,7 @@ export function Transactions() {
           keyboardShouldPersistTaps="handled"
         >
           <MainHeader />
-          <VStack flex={1} pb={10} bgColor="gray.900" px={12}>
+          <VStack flex={1} pb={10} bgColor="gray.900" px={12} mt={2}>
             <VStack
               display="flex"
               alignItems="center"

@@ -28,7 +28,7 @@ interface Message {
 export function CoinBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
-      content: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
+      content: `Olá, meu nome é Coin bot seu assistente de finanças virtual. Como posso te ajudar hoje? `,
       isUserMessage: false,
     },
   ]);
@@ -124,7 +124,7 @@ export function CoinBot() {
     try {
       setMessages([
         {
-          content: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
+          content: `Olá, meu nome é Coin bot seu assistente de finanças virtual. Como posso te ajudar hoje? `,
           isUserMessage: false,
         },
       ]);

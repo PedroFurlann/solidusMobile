@@ -12,6 +12,7 @@ import { AppNavigatorRoutesProps } from "../routes/app.routes";
 import { Button } from "../components/Button";
 import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { Alert } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface RouteParamsProps {
   transactionId: number;
@@ -58,11 +59,11 @@ export function TransactionDetails() {
 
   async function handleDeleteTransaction() {
     Alert.alert(
-      "Deletar",
+      "Deletar transação",
       `Deseja deletar a transação ${
         transaction &&
         transaction.title.charAt(0).toUpperCase() + transaction.title.slice(1)
-      }`,
+      }?`,
       [
         {
           text: "Sim",

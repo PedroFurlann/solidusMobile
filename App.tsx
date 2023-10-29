@@ -1,6 +1,6 @@
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { Login } from "./src/screens/Login";
-import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen'
+import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
 import {
   useFonts,
   Roboto_400Regular,
@@ -10,6 +10,7 @@ import { Routes } from "./src/routes";
 import { AuthContextProvider } from "./src/contexts/AuthContext";
 import { MainLoading } from "./src/components/MainLoading";
 import { useEffect } from "react";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,14 +20,14 @@ export default function App() {
 
   useEffect(() => {
     async function prepare() {
-      await preventAutoHideAsync()
+      await preventAutoHideAsync();
     }
 
-    prepare()
-  }, [fontsLoaded])
+    prepare();
+  }, [fontsLoaded]);
 
-  if(!fontsLoaded) {
-    return undefined
+  if (!fontsLoaded) {
+    return undefined;
   } else {
     hideAsync();
   }
@@ -38,7 +39,13 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <AuthContextProvider>{fontsLoaded && <Routes />}</AuthContextProvider>
+      <AuthContextProvider>
+        {fontsLoaded && (
+          <SafeAreaProvider>
+            <Routes />
+          </SafeAreaProvider>
+        )}
+      </AuthContextProvider>
     </NativeBaseProvider>
   );
 }
