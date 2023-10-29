@@ -23,7 +23,7 @@ export default function App() {
     }
 
     prepare()
-  }, [])
+  }, [fontsLoaded])
 
   if(!fontsLoaded) {
     return undefined
