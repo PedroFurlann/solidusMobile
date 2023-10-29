@@ -1,5 +1,6 @@
 import { NativeBaseProvider, StatusBar } from "native-base";
 import { Login } from "./src/screens/Login";
+import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen'
 import {
   useFonts,
   Roboto_400Regular,
@@ -8,12 +9,27 @@ import {
 import { Routes } from "./src/routes";
 import { AuthContextProvider } from "./src/contexts/AuthContext";
 import { MainLoading } from "./src/components/MainLoading";
+import { useEffect } from "react";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
     Roboto_700Bold,
   });
+
+  useEffect(() => {
+    async function prepare() {
+      await preventAutoHideAsync()
+    }
+
+    prepare()
+  }, [])
+
+  if(!fontsLoaded) {
+    return undefined
+  } else {
+    hideAsync();
+  }
 
   return (
     <NativeBaseProvider>
@@ -22,7 +38,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <AuthContextProvider>{fontsLoaded ? <Routes /> : <MainLoading size="md" />}</AuthContextProvider>
+      <AuthContextProvider>{fontsLoaded && <Routes />}</AuthContextProvider>
     </NativeBaseProvider>
   );
 }
