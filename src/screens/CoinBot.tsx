@@ -26,8 +26,6 @@ interface Message {
 }
 
 export function CoinBot() {
-  const { user } = useAuth();
-
   const [messages, setMessages] = useState<Message[]>([
     {
       content: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
@@ -76,7 +74,7 @@ export function CoinBot() {
             {
               role: "system",
               content:
-                "You are a helpful investment assistant, be as friendly as possible.",
+                "You are a helpful investment and financial assistant, be as friendly as possible.",
             },
             {
               role: "system",
@@ -120,10 +118,16 @@ export function CoinBot() {
     }
   }
 
-  async function getHistoricMessages() {
+  async function fetchMessagesHistoric() {
     setLoading(true);
 
     try {
+      setMessages([
+        {
+          content: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
+          isUserMessage: false,
+        },
+      ]);
       const response = await api.get("/messages");
       response.data.messages.forEach((message: Message) => {
         setMessages((state) => [
@@ -154,11 +158,11 @@ export function CoinBot() {
       await api.delete("/messages");
       setMessages([
         {
-          content: `Olá, meu nome é Coin bot seu assistente virtual de investimentos. Como posso te ajudar hoje? `,
+          content: `Olá, meu nome é Coin bot seu assistente de finanças virtual. Como posso te ajudar hoje? `,
           isUserMessage: false,
         },
       ]);
-      getHistoricMessages();
+      fetchMessagesHistoric();
       Toast.show({
         bgColor: "green.500",
         placement: "top",
@@ -182,7 +186,7 @@ export function CoinBot() {
   }
 
   async function handleDeleteTransaction() {
-    Alert.alert("Deletar", "Deseja deletar o histórico de mensagens", [
+    Alert.alert("Deletar mensagens", "Deseja deletar o histórico de mensagens?", [
       {
         text: "Sim",
         onPress: () => deleteHistoricMessage(),
@@ -194,9 +198,11 @@ export function CoinBot() {
     ]);
   }
 
-  useEffect(() => {
-    getHistoricMessages()
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      fetchMessagesHistoric();
+    }, [])
+  );
 
   return (
     <>
@@ -225,7 +231,11 @@ export function CoinBot() {
                   onPress={handleDeleteTransaction}
                 >
                   <Box
-                    bgColor={loading || messages.length <= 1 || loadingMessages ? "gray.400" : "red.500"}
+                    bgColor={
+                      loading || messages.length <= 1 || loadingMessages
+                        ? "gray.400"
+                        : "red.500"
+                    }
                     borderRadius="2xl"
                     p={2}
                     mb={6}

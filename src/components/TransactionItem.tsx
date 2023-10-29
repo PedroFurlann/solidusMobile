@@ -29,7 +29,7 @@ export function TransactionItem({ title, type, idTransaction, ...rest  }: Props)
       justifyContent="space-between"
       {...rest}
     >
-      <Text color="gray.200" bold fontSize="md">
+      <Text color="gray.200" bold fontSize="md" maxWidth={60} textAlign="center">
         {title.charAt(0).toUpperCase() + title.slice(1)}
       </Text>
       <Text color={type === "PROFIT" ? "amber.400" : "red.500"} bold fontSize="md" underline>

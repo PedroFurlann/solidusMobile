@@ -33,7 +33,7 @@ export function TransactionDetails() {
   const { transactionId } = params as RouteParamsProps;
 
   const transactionCategoryItems = [
-    { displayValue: "Comida", value: "FOOD" },
+    { displayValue: "Alimentação", value: "FOOD" },
     { displayValue: "Saúde", value: "HEALTH" },
     { displayValue: "Lazer", value: "FUNNY" },
     { displayValue: "Educação", value: "EDUCATION" },
