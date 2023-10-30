@@ -12,13 +12,22 @@ export function AuthHeader() {
     >
       <HStack
         w="full"
-        h={6}
+        h={20}
         justifyContent="center"
         alignItems="center"
         bgColor="gray.900"
         position="fixed"
-      />
-
+      >
+        <Image
+          source={Logo}
+          alt="Logo image"
+          resizeMode="contain"
+          defaultSource={Logo}
+          w={12}
+          h={12}
+          rounded="full"
+        />
+      </HStack>
     </SafeAreaView>
   );
 }
