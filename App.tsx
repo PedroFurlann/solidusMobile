@@ -36,7 +36,7 @@ export default function App() {
     <NativeBaseProvider>
       <StatusBar
         barStyle="light-content"
-        backgroundColor="transparent"
+        backgroundColor="#18181b"
         translucent
       />
       <AuthContextProvider>

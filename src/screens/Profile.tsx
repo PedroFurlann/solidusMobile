@@ -123,8 +123,7 @@ export function Profile() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          <MainHeader />
-          <VStack flex={1} pb={10} bgColor="gray.900" px={12} mt={6}>
+          <VStack flex={1} pb={10} bgColor="gray.900" px={12} mt={24}>
             <VStack
               display="flex"
               alignItems="center"

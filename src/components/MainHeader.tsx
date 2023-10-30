@@ -9,7 +9,6 @@ export function MainHeader({ ...rest }: Props) {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: "#fbbf24",
         alignItems: "center",
         justifyContent:"center",
       }}
@@ -20,7 +19,7 @@ export function MainHeader({ ...rest }: Props) {
         h={20}
         justifyContent="center"
         alignItems="center"
-        bgColor="amber.400"
+        bgColor="gray.900"
         position="fixed"
       >
         <AvatarProfile
