@@ -45,7 +45,6 @@ export function Button({
         fontSize="md"
         fontFamily="heading"
       >
-      
         {title}
       </Text>
       {!iconLeft && children}

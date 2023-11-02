@@ -12,7 +12,7 @@ import { useAuth } from "../hooks/useAuth";
 import { api } from "../services/api";
 import { AppError } from "../utils/AppError";
 import { MainLoading } from "../components/MainLoading";
-import UserPlacehodlerImage from '../assets/Portrait_Placeholder.png'
+import UserPlacehodlerImage from "../assets/Portrait_Placeholder.png";
 
 interface FormData {
   name: string;
@@ -79,7 +79,7 @@ export function Profile() {
     setLoading(true);
 
     try {
-      console.log(userData)
+      console.log(userData);
 
       await api.patch("/user", userData);
       await updateUserProfile(userUpdated);
@@ -89,7 +89,6 @@ export function Profile() {
         placement: "top",
         bgColor: "green.500",
       });
-
     } catch (error) {
       const isAppError = error instanceof AppError;
       const title = isAppError
@@ -248,32 +247,28 @@ export function Profile() {
               </Text>
 
               <Box width="full">
-              <Button
-                backgroundColor="#fbbf24"
-                title="Atualizar perfil"
-                onSubmit={handleSubmit(handleUpdateProfile)}
-                textColor="#fff"
-              />
-
-              <Button
-                title="Sair"
-                backgroundColor="#ef4444"
-                textColor="#e4e4e7"
-                onSubmit={async () => {
-                  await signOut()
-                }}
-                iconLeft={false}
-              >
-                <MaterialCommunityIcons
-                  name="door-open"
-                  color="#e4e4e7"
-                  size={22}
-                  style={{ marginLeft: 12, marginTop: 2 }}
+                <Button
+                  backgroundColor="#fbbf24"
+                  title="Atualizar perfil"
+                  onSubmit={handleSubmit(handleUpdateProfile)}
+                  textColor="#fff"
                 />
-              </Button>
-            </Box>
 
-              
+                <Button
+                  title="Sair"
+                  backgroundColor="#ef4444"
+                  textColor="#e4e4e7"
+                  onSubmit={signOut}
+                  iconLeft={false}
+                >
+                  <MaterialCommunityIcons
+                    name="door-open"
+                    color="#e4e4e7"
+                    size={22}
+                    style={{ marginLeft: 12, marginTop: 2 }}
+                  />
+                </Button>
+              </Box>
             </VStack>
           </VStack>
         </ScrollView>

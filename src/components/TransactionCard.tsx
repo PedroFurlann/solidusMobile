@@ -32,18 +32,18 @@ export function TransactionCard({ title, amount, ...rest }: Props) {
         </HStack>
       ) : amount > 0 ? (
         <HStack display="flex" alignItems="center">
-        <Text color="amber.400" bold marginRight={2} fontSize="md">
-          {priceFormatter.format(amount)}
-        </Text>
-        <Feather name="arrow-up-circle" color="#fbbf24" size={18} />
-      </HStack>
+          <Text color="amber.400" bold marginRight={2} fontSize="md">
+            {priceFormatter.format(amount)}
+          </Text>
+          <Feather name="arrow-up-circle" color="#fbbf24" size={18} />
+        </HStack>
       ) : (
         <HStack display="flex" alignItems="center">
-        <Text color="gray.400" bold marginRight={2} fontSize="md">
-          {priceFormatter.format(amount)}
-        </Text>
-        <Feather name="minus-circle" color="#a1a1aa" size={18} />
-      </HStack>
+          <Text color="gray.400" bold marginRight={2} fontSize="md">
+            {priceFormatter.format(amount)}
+          </Text>
+          <Feather name="minus-circle" color="#a1a1aa" size={18} />
+        </HStack>
       )}
     </Box>
   );

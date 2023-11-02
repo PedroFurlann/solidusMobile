@@ -268,6 +268,7 @@ export function NewTransaction() {
                     borderRadius="lg"
                     borderWidth={2}
                     bgColor="gray.600"
+                    ml={4}
                     borderColor={
                       selectedType === "PROFIT" ? "amber.400" : "gray.400"
                     }

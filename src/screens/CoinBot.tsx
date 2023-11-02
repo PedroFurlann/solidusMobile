@@ -186,16 +186,20 @@ export function CoinBot() {
   }
 
   async function handleDeleteTransaction() {
-    Alert.alert("Deletar mensagens", "Deseja deletar o histórico de mensagens?", [
-      {
-        text: "Sim",
-        onPress: () => deleteHistoricMessage(),
-      },
-      {
-        text: "Não",
-        style: "cancel",
-      },
-    ]);
+    Alert.alert(
+      "Deletar mensagens",
+      "Deseja deletar o histórico de mensagens?",
+      [
+        {
+          text: "Sim",
+          onPress: () => deleteHistoricMessage(),
+        },
+        {
+          text: "Não",
+          style: "cancel",
+        },
+      ]
+    );
   }
 
   useFocusEffect(

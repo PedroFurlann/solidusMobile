@@ -37,8 +37,6 @@ export function Transactions() {
 
   console.log(totalProfit, totalLoss);
 
-  
-
   async function fetchTransactions() {
     setLoading(true);
 

@@ -10,7 +10,7 @@ export function MainHeader({ ...rest }: Props) {
     <SafeAreaView
       style={{
         alignItems: "center",
-        justifyContent:"center",
+        justifyContent: "center",
       }}
     >
       <HStack
