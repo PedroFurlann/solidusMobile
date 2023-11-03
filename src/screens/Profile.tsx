@@ -52,6 +52,7 @@ export function Profile() {
     control,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(updateProfileSchema),
@@ -63,9 +64,7 @@ export function Profile() {
 
   async function handleUpdateProfile({
     name,
-    email,
     new_password,
-    confirm_new_password,
   }: FormData) {
     let userData = {
       name,
@@ -77,6 +76,10 @@ export function Profile() {
     userUpdated.name = name;
 
     setLoading(true);
+
+    if(getValues().new_password !== getValues().confirm_new_password) {
+      return;
+    }
 
     try {
       await api.patch("/user", userData);
@@ -189,7 +192,7 @@ export function Profile() {
               <Controller
                 control={control}
                 name="new_password"
-                rules={{ required: "Escolha uma senha" }}
+                rules={{ required: "Escolha uma senha",  }}
                 render={({ field: { onChange, value } }) => (
                   <Input
                     bgColor="white"
@@ -240,8 +243,8 @@ export function Profile() {
                 )}
               />
 
-              <Text color="red.500" mb={8} fontWeight="bold">
-                {errors.confirm_new_password?.message}
+              <Text color="red.500" mb={8} fontWeight="bold" mt={1}>
+                {getValues().new_password !== getValues().confirm_new_password && "As senhas devem coincidir"}
               </Text>
 
               <Box width="full">

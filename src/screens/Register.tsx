@@ -55,6 +55,7 @@ export function Register() {
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(registerSchema),
@@ -66,6 +67,10 @@ export function Register() {
       email,
       password,
     };
+
+    if(getValues().password !== getValues().confirm_password) {
+      return;
+    }
 
     try {
       await api.post("/user", userData);
@@ -234,8 +239,8 @@ export function Register() {
               )}
             />
 
-            <Text color="red.500" mb={2} fontWeight="bold">
-              {errors.confirm_password?.message}
+            <Text color="red.500" mb={4} fontWeight="bold" mt={1}>
+              {getValues().password !== getValues().confirm_password && "As senhas devem coincidir."}
             </Text>
 
             <Button
