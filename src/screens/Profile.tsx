@@ -75,12 +75,14 @@ export function Profile() {
 
     userUpdated.name = name;
 
-    setLoading(true);
-
+    
     if(getValues().new_password !== getValues().confirm_new_password) {
+      console.log("aqui")
       return;
     }
 
+    setLoading(true);
+    
     try {
       await api.patch("/user", userData);
       await updateUserProfile(userUpdated);
