@@ -79,8 +79,6 @@ export function Profile() {
     setLoading(true);
 
     try {
-      console.log(userData);
-
       await api.patch("/user", userData);
       await updateUserProfile(userUpdated);
 

@@ -111,9 +111,6 @@ export function TransactionDetails() {
 
     try {
       const response = await api.get(`transactions/${transactionId}`);
-
-      console.log(response.data.transaction);
-
       setTransaction(response.data.transaction);
     } catch (error) {
       const isAppError = error instanceof AppError;

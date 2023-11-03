@@ -34,15 +34,11 @@ export function Transactions() {
   });
 
   const finalAmount: number = totalProfit + totalLoss;
-
-  console.log(totalProfit, totalLoss);
-
   async function fetchTransactions() {
     setLoading(true);
 
     try {
       const response = await api.get("/transactions");
-      console.log(response.data);
       setTransactions(response.data.transactions);
     } catch (error) {
       const isAppError = error instanceof AppError;
