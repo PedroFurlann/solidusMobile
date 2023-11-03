@@ -77,7 +77,6 @@ export function Profile() {
 
     
     if(getValues().new_password !== getValues().confirm_new_password) {
-      console.log("aqui")
       return;
     }
 
