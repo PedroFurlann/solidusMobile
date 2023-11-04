@@ -47,12 +47,16 @@
 ### Imagens do Aplicativo / App images :camera:
 
 <div>
-  <img src="https://raw.githubusercontent.com/PedroFurlann/solidus/master/public/Captura%20de%20tela%20de%202023-11-04%2016-22-03.png" />
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970345.png?token=GHSAT0AAAAAACHDLQDLEBMF5EVGA4C62TM6ZKGWM3A" />
 
-  <img src="https://raw.githubusercontent.com/PedroFurlann/solidus/master/public/Captura%20de%20tela%20de%202023-11-04%2016-23-26.png" />
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970267.png?token=GHSAT0AAAAAACHDLQDLYFBGXZSNDPRTXUYAZKGWNPA" />
 
-  <img src="https://raw.githubusercontent.com/PedroFurlann/solidus/master/public/Captura%20de%20tela%20de%202023-11-04%2016-22-28.png" />
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970274.png?token=GHSAT0AAAAAACHDLQDK66PULM55VMIPLIZIZKGWNZQ" />
 
-  <img src="https://github.com/PedroFurlann/solidus/blob/master/public/Captura%20de%20tela%20de%202023-11-04%2017-07-55.png" />
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970295.png?token=GHSAT0AAAAAACHDLQDLXHNQIALYXK6W5WNUZKGWOPA" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970309.png?token=GHSAT0AAAAAACHDLQDKGUSJXNE5LOU3RUZQZKGWOWA" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/solidusMobile/main/src/assets/Screenshot_1698970285.png?token=GHSAT0AAAAAACHDLQDL5BNOLL6EEJSEI7KQZKGWPLA" />
 
 </div>
