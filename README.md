@@ -2,7 +2,7 @@
 
 ## (PT-BR)
 
-### A aplicação conta com funcionalidades como: registrar transações, visualizar seus gastos e ganhos ao longo do tempo e gerar um resumo do seu balanço financeiro. Você também contará com o Coin bot, um assistente virtual que lhe auxiliará sobre como lidar com suas economias além de proporcionar excelentes dicas de investimentos. A versão mobile foi desenvolvida utilizando React Native + Typescript + Expo + Native Base. Além de contar contar com um Chatbot criado a partir da integração com a API da OpenAI. :bookmark_tabs:
+### A Solidus é a solução perfeita para você que busca controlar de forma mais organizada suas finanças. A aplicação conta com funcionalidades como: registrar transações, visualizar seus gastos e ganhos ao longo do tempo e gerar um resumo do seu balanço financeiro. Você também contará com o Coin bot, um assistente virtual que lhe auxiliará sobre como lidar com suas economias além de proporcionar excelentes dicas de investimentos. A versão mobile foi desenvolvida utilizando React Native + Typescript + Expo + Native Base. Além de contar contar com um Chatbot criado a partir da integração com a API da OpenAI. :bookmark_tabs:
 
 ### Principais tecnologias utilizadas :computer:
 
@@ -20,7 +20,9 @@
 <hr>
 <br>
 
-### The application has features such as: recording transactions, visualizing your spending and earnings over time and generating a summary of your financial statement. You'll also have the Coin bot, a virtual assistant that will help you with your savings and provide excellent investment tips. The Mobile version has been developed using React Native + Typescript + Expo + Native Base. It also has a Chatbot created from integration with the OpenAI API. :bookmark_tabs:
+## (EN)
+
+### Solidus is the perfect solution for you who want to control your finances in a more organized way. The application has features such as: recording transactions, visualizing your spending and earnings over time and generating a summary of your financial statement. You'll also have the Coin bot, a virtual assistant that will help you with your savings and provide excellent investment tips. The Mobile version has been developed using React Native + Typescript + Expo + Native Base. It also has a Chatbot created from integration with the OpenAI API. :bookmark_tabs:
 
 ### Main technologies used :computer:
 
